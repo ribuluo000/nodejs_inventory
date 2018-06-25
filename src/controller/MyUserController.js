@@ -113,7 +113,7 @@ class MyUserController extends MyBaseController {
                 err___
                 ${req_url}__\n
                 ${msg}__\n
-                ${err}__\n
+                ${JSON.stringify(err)}__\n
                 `);
 
                 MyCommon.res_send_sys_error(
@@ -203,7 +203,7 @@ class MyUserController extends MyBaseController {
                 err___
                 ${req_url}__\n
                 ${msg}__\n
-                ${err}__\n
+                ${JSON.stringify(err)}__\n
                 `);
 
                 MyCommon.res_send_sys_error(
