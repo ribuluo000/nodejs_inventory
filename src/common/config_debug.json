@@ -1,6 +1,6 @@
 {
-  "debug_mode":"DEBUG",
-  "mongodb": {
+  "debug_mode" : "DEBUG",
+  "mongodb" : {
     "conn1" : {
       "path" : "mongodb://172.16.34.14/test",
       "options" : {
@@ -18,7 +18,7 @@
       }
     }
   },
-  "redis": {
+  "redis" : {
     "redis_db0" : {
       "host" : "172.16.34.14",
       "port" : 6379,
@@ -32,5 +32,10 @@
       "db" : 1
     }
   },
-  "port": 4002
+  "i18n_config" : {
+    "lang" : "zh-CN",
+    "lang_en" : "en",
+    "langFile" : "./../../src/i18n/locale.json"
+  },
+  "port" : 4002
 }

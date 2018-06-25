@@ -15,5 +15,5 @@ class InitUtil{
     }
 }
 
-module.exports = new InitUtil();
+export default new InitUtil();
 

@@ -12,6 +12,34 @@ function YBVerify() {
     // 引入config文件
     const config = MyConfig;
 
+
+
+
+    /**
+     * 接口必传参数验证
+     * 参数: 数组 ["product_id","company_id"]
+     */
+    this.verify_parameter = (parameter, fields) => {
+        for (var i = 0; i < parameter.length; i++) {
+            let key = parameter[i];
+            let value = fields[key];
+            if (
+                // typeof value == 'undefined' || value == '' ||
+                !value) {
+                return {
+                    passed:false,
+                    key_name:key,
+                };
+            }
+        }
+        return {
+            passed:true,
+
+        };
+    }
+
+
+
     //手机验证
     this.verifyTelphone = function (str) {
         var istelephone = /^1[3|4|5|6|7|8|9][0-9]{9}$/;
@@ -68,23 +96,6 @@ function YBVerify() {
             returnResult.push(item.substring(start, end).toLowerCase());
         }
         return returnResult;
-    }
-
-
-
-    /**
-     * 接口必传参数验证
-     * 参数: 数组 ["product_id","company_id"]
-     */
-    this.verify_parameter = (parameter, req) => {
-        for (var i = 0; i < parameter.length; i++) {
-            let key = parameter[i];
-            let key_name = req.params[key];
-            if (typeof key_name == 'undefined' || key_name == '' || !key_name) {
-                return false;
-            }
-        }
-        return true;
     }
 
 
