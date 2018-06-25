@@ -45,6 +45,12 @@ console.log(MyConstantUtil);
 // console.log(global);
 
 
+const MyGlobalUtil = {
+    init:()=>{},
+};
+
+export default MyGlobalUtil;
+
 //
 // global.YBVerifyTool = require('../util/YBVerifyUtil');
 // global.YBTokenVerify = require('../util/YBTokenVerify');

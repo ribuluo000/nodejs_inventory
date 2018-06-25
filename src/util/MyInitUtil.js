@@ -8,6 +8,7 @@ import MyAccessLogUtil from './MyAccessLogUtil';
 import MyLogUtil from './MyLogUtil';
 class InitUtil{
     init(app){
+        MyGlobalUtil.init(app);
         MyAccessLogUtil.init(app);
         MyLogUtil.init(app);
 
