@@ -2,12 +2,12 @@
  * Created by nick on 2018/1/27.
  */
 import YBSystemModel from '../models/MySystemModel';
+import FileStreamRotator from 'file-stream-rotator';
+import fs from 'fs';
+import morgan from 'morgan';
+import path from 'path';
 class MyAccessLogUtil{
     init(app){
-        var FileStreamRotator = require('file-stream-rotator')
-        var fs = require('fs')
-        var morgan = require('morgan')
-        var path = require('path')
 
         var logDirectory = path.join(__dirname,'..', 'log')
 

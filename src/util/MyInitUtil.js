@@ -1,13 +1,15 @@
 /**
  * Created by nick on 2018/1/27.
  */
-// var AccessLogUtil = require('./AccessLogUtil');
-// var LogUtil = require('./LogUtil');
+
 import MyGlobalUtil from './MyGlobalUtil';
+
+import MyAccessLogUtil from './MyAccessLogUtil';
+import MyLogUtil from './MyLogUtil';
 class InitUtil{
     init(app){
-        // AccessLogUtil.init(app);
-        // LogUtil.init(app);
+        MyAccessLogUtil.init(app);
+        MyLogUtil.init(app);
 
     }
 }

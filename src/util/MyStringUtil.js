@@ -1,6 +1,7 @@
 /**
  * Created by nick on 2018/1/27.
  */
+import Hashids from 'hashids';
 
 function obj(){
 
@@ -74,7 +75,6 @@ function obj(){
      * 参数:
      */
     this.create_short_id = () => {
-        let Hashids = require('hashids');
         let hashids = new Hashids('123456', 8);
 
         let nNowTime = parseInt(new Date().getTime() / 1000);
