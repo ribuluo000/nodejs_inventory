@@ -32,7 +32,7 @@ class MyUserController extends MyBaseController {
     async login(req, res, next) {
         let req_url = MyConstantUtil.REQ_URL.REQ_URL___user__login;
         let msg = '';
-        let code = '0';
+        let code = '';
 
         const form = new formidable.IncomingForm();
         form.parse(req, async (err, fields, files) => {
@@ -89,6 +89,8 @@ class MyUserController extends MyBaseController {
 
                     return
                 } else {
+                    msg = MyConstantUtil.MSG.MSG___login_success;
+
                     req.session.user_id = user._id;
 
                     let data = null;
@@ -130,7 +132,7 @@ class MyUserController extends MyBaseController {
     async register(req, res, next) {
         let req_url = MyConstantUtil.REQ_URL.REQ_URL___user__register;
         let msg = '';
-        let code = '0';
+        let code = '';
 
         const form = new formidable.IncomingForm();
         form.parse(req, async (err, fields, files) => {
