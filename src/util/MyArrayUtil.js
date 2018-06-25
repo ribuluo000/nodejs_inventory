@@ -1,7 +1,7 @@
 /**
  * Created by nick on 2018/1/29.
  */
-function ArrayUtil(){
+function MyArrayUtil(){
 
 
     /**
@@ -71,7 +71,7 @@ function ArrayUtil(){
     // arr.sort(compare).reverse();
 
 }
-module.exports = new ArrayUtil();
+export default new MyArrayUtil();
 
 
 

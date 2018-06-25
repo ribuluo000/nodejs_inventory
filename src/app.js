@@ -2,6 +2,7 @@ console.log('111');
 
 
 import express from 'express';
+// import db1 from './common/db.js';
 import db from './mongodb/db.js';
 import config from 'config-lite';
 import router from './routes/index.js';
@@ -13,9 +14,11 @@ import expressWinston from 'express-winston';
 import path from 'path';
 import history from 'connect-history-api-fallback';
 import chalk from 'chalk';
+import MyInitUtil from './util/MyInitUtil';
 // import Statistic from './middlewares/statistic'
 
 const app = express();
+MyInitUtil.init(app);
 
 app.all('*', (req, res, next) => {
 	res.header("Access-Control-Allow-Origin", req.headers.Origin || req.headers.origin || 'https://cangdu.org');

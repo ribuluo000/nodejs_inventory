@@ -1,8 +1,9 @@
 /**
  * Created by nick on 2018/6/20.
  */
-import mongoose from 'mongoose'
-
+import db from '../common/db';
+const mongoose  = db.mongoose;
+const mongodb_conn1  = db.mongodb_conn1;
 const Schema = mongoose.Schema,
 
     ObjectId = Schema.ObjectId;
@@ -91,6 +92,6 @@ BillSchema.index({
 
 }); // schema level
 
-const Bill = mongoose.model('Bill', BillSchema);
+const Bill = mongodb_conn1.model('Bill', BillSchema);
 
 export default Bill;

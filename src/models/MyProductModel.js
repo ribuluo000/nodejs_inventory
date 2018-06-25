@@ -1,8 +1,9 @@
 /**
  * Created by nick on 2018/6/20.
  */
-import mongoose from 'mongoose'
-
+import db from '../common/db';
+const mongoose  = db.mongoose;
+const mongodb_conn1  = db.mongodb_conn1;
 const Schema = mongoose.Schema,
 
     ObjectId = Schema.ObjectId;
@@ -34,6 +35,6 @@ ProductSchema.index({
 
 }); // schema level
 
-const Product = mongoose.model('Product', ProductSchema);
+const Product = mongodb_conn1.model('Product', ProductSchema);
 
 export default Product;

@@ -1,8 +1,9 @@
 /**
  * Created by nick on 2018/6/20.
  */
-import mongoose from 'mongoose'
-
+import db from '../common/db';
+const mongoose  = db.mongoose;
+const mongodb_conn1  = db.mongodb_conn1;
 const Schema = mongoose.Schema,
 
     ObjectId = Schema.ObjectId;
@@ -39,6 +40,6 @@ BatchSchema.index({
 
 }); // schema level
 
-const Batch = mongoose.model('Batch', BatchSchema);
+const Batch = mongodb_conn1.model('Batch', BatchSchema);
 
 export default Batch;

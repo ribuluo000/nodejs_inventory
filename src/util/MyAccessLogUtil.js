@@ -1,9 +1,8 @@
 /**
  * Created by nick on 2018/1/27.
  */
-const YPLog=require('../models/YBCXYLogModel');
-
-class AccessLogUtil{
+import YBSystemModel from '../models/MySystemModel';
+class MyAccessLogUtil{
     init(app){
         var FileStreamRotator = require('file-stream-rotator')
         var fs = require('fs')
@@ -43,7 +42,7 @@ class AccessLogUtil{
                     response_time:tokens['response-time'](req, res), //响应时间
                     day:new Date().getTime(),
                 };
-                YPLog.create(data);
+                YBSystemModel.create(data);
                 return [
                     tokens.method(req, res)+' /',
                     req.body.api_name+': '+JSON.stringify(req.body),
@@ -56,4 +55,4 @@ class AccessLogUtil{
     }
 }
 
-module.exports = new AccessLogUtil();
+export default new MyAccessLogUtil();

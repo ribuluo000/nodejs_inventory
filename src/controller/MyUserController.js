@@ -3,12 +3,12 @@
  */
 'use strict';
 
-import YBUserModel from "../models/YBUserModel";
-import YBBaseController from "./base/YBBaseController";
+import MyUserModel from "../models/MyUserModel";
+import MyBaseController from "./base/MyBaseController";
 import formidable from "formidable";
 import crypto from 'crypto'
 
-class YBUserController extends YBBaseController {
+class MyUserController extends MyBaseController {
     constructor() {
         super()
         this.login = this.login.bind(this)
@@ -55,7 +55,7 @@ class YBUserController extends YBBaseController {
             }
             const newpassword = this.encryption(password);
             try {
-                const user = await YBUserModel.findOne({ user_name })
+                const user = await MyUserModel.findOne({ user_name })
                 if (!user) {
                     res.send({
                         code : 1,
@@ -120,7 +120,7 @@ class YBUserController extends YBBaseController {
                 return
             }
             try {
-                const user = await YBUserModel.findOne({ user_name })
+                const user = await MyUserModel.findOne({ user_name })
                 if (user) {
                     console.log('该用户已经存在');
                     res.send({
@@ -134,8 +134,8 @@ class YBUserController extends YBBaseController {
                         user_name:user_name,
                         password : newpassword,
                     }
-                    await YBUserModel.create(newUser);
-                    // const user2 = await YBUserModel.findOne({ user_name });
+                    await MyUserModel.create(newUser);
+                    // const user2 = await MyUserModel.findOne({ user_name });
                     // req.session.user_id = user2._id;
                     res.send({
                         code : 0,
@@ -155,4 +155,4 @@ class YBUserController extends YBBaseController {
     };
 }
 
-export default new YBUserController()
+export default new MyUserController()

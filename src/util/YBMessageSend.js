@@ -1,10 +1,17 @@
-var request = require('request'); //request模块
-var urlencode = require("urlencode");
-var config = YBConfig;
-var md5 = require('.//YBEncryption').md5; //md5模块
-var _ = require('underscore'); //underscore模块
-var JPush = require("../node_modules/jpush-sdk/lib/JPush/JPush.js");
-var client = JPush.buildClient(config.jpush_config.AppKey, config.jpush_config.MasterSecret);
+import request from 'request';
+import urlencode from 'urlencode';
+import _ from 'underscore';
+import MyConfig from '../common/config';
+
+import MyEncryptionUtil from './MyEncryptionUtil';
+import request from 'request';
+import request from 'request';
+import request from 'request';
+import request from 'request';
+
+var md5 = MyEncryptionUtil.md5; //md5模块
+// var JPush = require("../node_modules/jpush-sdk/lib/JPush/JPush.js");
+// var client = JPush.buildClient(MyConfig.jpush_config.AppKey, MyConfig.jpush_config.MasterSecret);
 var io = require('../controllers/YBSocket').io; //io
 var chatio = require('../controllers/YBSocket').chat;
 var redis = require('../common/db').redis;
@@ -13,18 +20,17 @@ var fs = require('fs');
 const nodemailer = require('nodemailer');
 var CompanyWXGetAccessToken = require('./CompanyWXGetAccessToken.js').CompanyWXGetAccessToken;
 var ContactsModel = require('../models/YBContactsModel.js');
-const smtp = config.email_config.smtp;
+const smtp = MyConfig.email_config.smtp;
 const moment = require('moment');
 const YBSmsModel = require('../models/YBSmsModel');
 const CompanyModel = require('../models/YBCompanyModel');
 const YBSocketRecord = require('../models/YBNewsRecordsModel');
-const SystemModel = require('../models/YBSystemModel');
+const SystemModel = require('../models/MySystemModel');
 let async = require('async');
 // var YBSocket = require('../controllers/YBSocket');
 
 
 /**
- * 负责人：MC_Z
  * 消息推送
  * 推送对象@param target  给所有人推还是个人   all所有人/group一组人/one一个人
  * 推送内容@param content
@@ -320,9 +326,9 @@ class Sms {
             sms_send_time: this.sms_send_time,
             sms_code: 1
         };
-        let account = config.message_account.user_name;
-        let passcode = config.message_account.password;
-        let token = config.message_account.token;
+        let account = MyConfig.message_account.user_name;
+        let passcode = MyConfig.message_account.password;
+        let token = MyConfig.message_account.token;
         let random = parseInt(('' + Math.random()).match(/[1-9]\d{5}/)[0]); //长度为6的随机数
         let timestamp = this.sms_send_time;
         //请求参数体
@@ -333,7 +339,7 @@ class Sms {
                 phone: this.sms_telephone,
                 msgTxt: this.sms_content,
                 createTime: timestamp,
-                validSecond: config.message_account.validSecond
+                validSecond: MyConfig.message_account.validSecond
             }]
         };
         // 加密的key
@@ -424,6 +430,10 @@ exports.sms_send = function (sms_telephone, sms_content, company_id) {
     })
 };
 
+
+/***
+ *
+ * jpush
 
 //way ： 以什么样的方式推送（all；registration_id；alias；tag）
 //name ： registration_id的值 或 alias的值 或tag的值 ，如果way的值是all，则此参数可以省略
@@ -536,7 +546,7 @@ exports.app_push = function (data, is_need_safe = false) {
     return 'app push has successed'
 
 }
-
+ */
 //发送验证码
 exports.captcha_send = function (phone, callback) {
     //产生验证码
@@ -581,8 +591,8 @@ exports.captcha_check = function (phone, captcha, callback) {
 
 
 exports.mail_send = function (company_name, callback) {
-    let smtp = config.email_config.smtp;
-    let sender = config.email_config.send_to.user;
+    let smtp = MyConfig.email_config.smtp;
+    let sender = MyConfig.email_config.send_to.user;
     let transporter = nodemailer.createTransport(smtp);
     let mailOptions = {
         from: 'Yoopard<yoopard@mail.yoopard.cn>', // sender address mailfrom must be same with the user
@@ -668,7 +678,7 @@ exports.wechat_send = function (company_id, contact_id, content, callback) {
  * @param callback
  */
 exports.international_mail_send = function (user_email, callback) {
-    let smtp = config.email_config.smtp;
+    let smtp = MyConfig.email_config.smtp;
     let email_captcha = parseInt(('' + Math.random()).match(/[1-9]\d{5}/)[0]); //长度为6的随机数
 
     //将邮箱和验证码以k:v形势存储在redis_db1中，并设置过期时间
@@ -681,7 +691,7 @@ exports.international_mail_send = function (user_email, callback) {
         }
     });
     //redis_db1.get(user_email, function (err, result) {console.log(result+'555')});
-    //let sender=config.email_config.send_to.user;
+    //let sender=MyConfig.email_config.send_to.user;
     let transporter = nodemailer.createTransport(smtp);
     let mailOptions = {
         from: 'Yoopard<yoopard@mail.yoopard.cn>', // sender address mailfrom must be same with the user

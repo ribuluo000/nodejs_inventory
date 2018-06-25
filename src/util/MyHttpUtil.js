@@ -1,14 +1,17 @@
 /**
  * 封装Fetch请求 统一接口
  */
-const node_fetch = require('node-fetch');
-const request = require('request');
-const async = require('async');
-const config = require('../common/config');
-const redis_db1 = require('../common/db').redis_db1;
+import request from 'request';
+import node_fetch from 'node-fetch';
+import async from 'async';
+import MyConfig from '../common/config';
+import db from '../common/db';
 
-class YBFetchTool {
-    YBFetch(url, option, callback) {
+const config = MyConfig;
+const redis_db1 = db.redis_db1;
+
+class MyHttpUtil {
+    MyFetch(url, option, callback) {
         node_fetch(url, {
             method: 'POST',
             body: JSON.stringify(option),
@@ -21,7 +24,7 @@ class YBFetchTool {
     /**
      * POST multipart/form-data
      */
-    Request(url, formData, callback) {
+    MyRequest(url, formData, callback) {
         request.post({url: url, formData: formData}, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 callback(null, body);
@@ -34,4 +37,4 @@ class YBFetchTool {
 
 }
 
-module.exports = new YBFetchTool();
+export default new MyHttpUtil();

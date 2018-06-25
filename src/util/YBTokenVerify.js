@@ -13,7 +13,7 @@
 var jwt = require('jsonwebtoken');
 var config = YBConfig;
 var redis_db0 = require('../common/db.js').redis;
-var md5 = require('./YBEncryption.js').md5;
+var md5 = require('./MyEncryptionUtil.js').md5;
 
 function YBTokenVerify() {
     // 创建Token

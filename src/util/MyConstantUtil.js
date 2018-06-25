@@ -8,4 +8,4 @@ let obj = {
 };
 
 
-module.exports = obj;
+export default obj;

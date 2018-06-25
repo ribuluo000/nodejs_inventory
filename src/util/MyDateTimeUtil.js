@@ -1,7 +1,7 @@
 /**
  * Created by nick on 2018/1/29.
  */
-function DateTimeUtil(){
+function MyDateTimeUtil(){
 
 
     /**
@@ -57,4 +57,4 @@ function DateTimeUtil(){
 
 
 }
-module.exports = new DateTimeUtil();
+module.exports = new MyDateTimeUtil();

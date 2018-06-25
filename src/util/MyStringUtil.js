@@ -85,4 +85,4 @@ function obj(){
     };
 }
 
-module.exports = new obj();
+export default new obj();

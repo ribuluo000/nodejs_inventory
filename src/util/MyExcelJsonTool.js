@@ -2,8 +2,7 @@
  * 一个用户处理Excel和json互转的工具类
  */
 
-var xlsx = require("node-xlsx");
-
+import xlsx from 'node-xlsx';
 /**
  * 将Excel转成JSON返回JSON数据
  */

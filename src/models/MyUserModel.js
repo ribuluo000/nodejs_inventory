@@ -1,7 +1,9 @@
 /**
  * Created by nick on 2018/6/20.
  */
-import mongoose from 'mongoose'
+import db from '../common/db';
+const mongoose  = db.mongoose;
+const mongodb_conn1  = db.mongodb_conn1;
 
 const Schema = mongoose.Schema,
 
@@ -26,6 +28,6 @@ UserSchema.index({ user_name: 1}); // schema level
 
 UserSchema.index({ balance: -1 , user_name: 1}); // schema level
 
-const User = mongoose.model('User', UserSchema);
+const User = mongodb_conn1.model('User', UserSchema);
 
 export default User;

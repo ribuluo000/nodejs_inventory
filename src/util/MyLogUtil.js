@@ -1,10 +1,12 @@
 /**
  * Created by nick on 2018/1/27.
  */
-var log4js = require('log4js');
-var path = require('path')
-var config = require('../common/config')
-var ConstantUtil = require('./ConstantUtil')
+
+import log4js from 'log4js';
+import path from 'path';
+import MyConfig from '../common/config';
+import MyConstantUtil from './MyConstantUtil';
+var config = MyConfig
 var logDirectory = path.join(__dirname,'..', 'log')
 
 log4js.configure({
@@ -82,7 +84,7 @@ var init = (app)=>{
 };
 
 let logger = undefined;
-if(config.debug_mode == ConstantUtil.DEBUG){
+if(config.debug_mode == MyConstantUtil.DEBUG){
     logger = loggerDebug;
 }else {
     logger = loggerRelease;
@@ -101,5 +103,4 @@ function obj() {
     this.logger = logger;
 }
 
-
-module.exports = new obj();
+export default new obj();

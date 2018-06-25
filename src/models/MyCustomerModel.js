@@ -1,15 +1,17 @@
 /**
  * Created by nick on 2018/6/20.
  */
-import mongoose from 'mongoose'
-
+import db from '../common/db';
+const mongoose  = db.mongoose;
+const mongodb_conn1  = db.mongodb_conn1;
 const Schema = mongoose.Schema,
 
     ObjectId = Schema.ObjectId;
 
-//供应商
 
-var ProviderSchema = new Schema({
+//客户
+
+var CustomerSchema = new Schema({
 
     object_id_created_by: [Schema.Types.ObjectId],	//创建人 object_id
 
@@ -26,7 +28,7 @@ var ProviderSchema = new Schema({
 });
 
 
-ProviderSchema.index({
+CustomerSchema.index({
 
     object_id_created_by: 1 ,
 
@@ -34,6 +36,6 @@ ProviderSchema.index({
 
 }); // schema level
 
-const Provider = mongoose.model('Provider', ProviderSchema);
+const Customer = mongodb_conn1.model('Customer', CustomerSchema);
 
-export default Provider;
+export default Customer;

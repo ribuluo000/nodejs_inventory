@@ -2,14 +2,15 @@
  * 函数封装
  * @authors 祁俊
  */
-
+import fs from 'fs';
+import path from 'path';
+import MyEncryptionUtil from './MyEncryptionUtil';
+import MyConfig from '../common/config';
 function YBVerify() {
-    var fs = require('fs');
-    var join = require('path').join;
-    var md5 = require('./YBEncryption').md5;
-    let path = require('path');
+    var join = path.join;
+    var md5 = MyEncryptionUtil.md5;
     // 引入config文件
-    const config = require('../common/config');
+    const config = MyConfig;
 
     //手机验证
     this.verifyTelphone = function (str) {
@@ -91,4 +92,4 @@ function YBVerify() {
 
 
 // 导出模块
-module.exports = new YBVerify();
+export default new YBVerify();

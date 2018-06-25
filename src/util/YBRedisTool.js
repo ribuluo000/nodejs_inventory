@@ -1,19 +1,21 @@
-var redisClient = require('../common/db').redis;
-var RbacModel = require('../models/YBSystemModel');
+import db from '../common/db';
+
+var redis_db0 = db.redis_db0;
+var RbacModel = require('../models/MySystemModel');
 var TagModel = require('../models/YBTagModel');
 var User_CompanyModel = require('../models/YBUser_CompanyModel');
-var SystemModel = require('../models/YBSystemModel');
-var md5 = require('./YBEncryption').md5;
+var SystemModel = require('../models/MySystemModel');
+var md5 = require('./MyEncryptionUtil').md5;
 
 // 读取system表的权限
 exports.permissions_list = function(callback) {
-    redisClient.get('permissions', function(error, response) {
+    redis_db0.get('permissions', function(error, response) {
         if (error) {
             callback(null, error)
         } else if (!response) {
             RbacModel.findOne({}, { permissions: 1, roles: 1 }, function(error, response) {
                 var permiss = JSON.stringify(response);
-                redisClient.set('permissions', permiss);
+                redis_db0.set('permissions', permiss);
                 callback(null, response)
             })
         } else {
@@ -26,7 +28,7 @@ exports.permissions_list = function(callback) {
  * Tag表Redis存储读取
  */
 exports.tags_list = function(callback) {
-    redisClient.get('tag', function(error, redisResult) {
+    redis_db0.get('tag', function(error, redisResult) {
         if (error) {
             callback(error, null);
             return;
@@ -39,7 +41,7 @@ exports.tags_list = function(callback) {
                     callback(error, null);
                     return;
                 }
-                redisClient.set('tag', JSON.stringify(tagResult));
+                redis_db0.set('tag', JSON.stringify(tagResult));
                 callback(null, tagResult);
             })
         }
@@ -50,7 +52,7 @@ exports.tags_list = function(callback) {
  * 将access_token作为key。user_id和company_id作为value存储到redis中
  */
 exports.set_access_token_user_company = function(user_id, company_id, access_token, callback) {
-    redisClient.hset("access_token", md5(user_id + company_id), JSON.stringify({
+    redis_db0.hset("access_token", md5(user_id + company_id), JSON.stringify({
         user_id: user_id,
         company_id: company_id,
         access_token: access_token
@@ -61,7 +63,7 @@ exports.set_access_token_user_company = function(user_id, company_id, access_tok
  * user_info表Redis存储读取
  */
 exports.user_info_list = function(user_id, company_id, callback) {
-    redisClient.hget('user_company_info', md5(user_id + company_id), function(error, userResult) {
+    redis_db0.hget('user_company_info', md5(user_id + company_id), function(error, userResult) {
         if (error) {
             callback(error, null);
             return;
@@ -86,7 +88,7 @@ exports.user_info_list = function(user_id, company_id, callback) {
                     },
                     "user_enable_state": company_idResult.user_enable_state
                 }
-                redisClient.hset('user_company_info', md5(user_id + company_id), JSON.stringify(user_company_info));
+                redis_db0.hset('user_company_info', md5(user_id + company_id), JSON.stringify(user_company_info));
                 callback(null, user_company_info);
             })
         }
@@ -97,7 +99,7 @@ exports.user_info_list = function(user_id, company_id, callback) {
  * request_verify表Redis存储读取
  */
 exports.request_verify_list = function(callback) {
-    redisClient.get('request_verify', function(error, findResult) {
+    redis_db0.get('request_verify', function(error, findResult) {
         if (error) {
             callback(error, null);
             return;
@@ -110,7 +112,7 @@ exports.request_verify_list = function(callback) {
                     callback(error, null);
                     return;
                 }
-                redisClient.set('request_verify', JSON.stringify(systemResult.request_verify));
+                redis_db0.set('request_verify', JSON.stringify(systemResult.request_verify));
                 callback(null, systemResult.request_verify);
             })
         }
@@ -121,7 +123,7 @@ exports.request_verify_list = function(callback) {
  * service_modes表Redis存储读取
  */
 exports.service_modes_list = function(callback) {
-    redisClient.get('service_modes', function(error, findResult) {
+    redis_db0.get('service_modes', function(error, findResult) {
         if (error) {
             callback(error, null);
             return;
@@ -134,7 +136,7 @@ exports.service_modes_list = function(callback) {
                     callback(error, null);
                     return;
                 }
-                redisClient.set('service_modes', JSON.stringify(systemResult.service_modes));
+                redis_db0.set('service_modes', JSON.stringify(systemResult.service_modes));
                 callback(null, systemResult.service_modes);
             })
         }
@@ -145,7 +147,7 @@ exports.service_modes_list = function(callback) {
  * provide表Redis存储读取
  */
 exports.provide_list = function(callback) {
-    redisClient.get('provide', function(error, findResult) {
+    redis_db0.get('provide', function(error, findResult) {
         if (error) {
             callback(error, null);
             return;
@@ -158,7 +160,7 @@ exports.provide_list = function(callback) {
                     callback(error, null);
                     return;
                 }
-                redisClient.set('provide', JSON.stringify(systemResult.provide));
+                redis_db0.set('provide', JSON.stringify(systemResult.provide));
                 callback(null, systemResult.provide);
             })
         }
