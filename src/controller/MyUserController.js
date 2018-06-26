@@ -3,7 +3,7 @@
  */
 'use strict';
 
-import MyUserModel from "../models/MyUserModel";
+import MyModel from "../models/MyUserModel";
 import MyBaseController from "./base/MyBaseController";
 import crypto from "crypto";
 
@@ -17,7 +17,7 @@ function encryption(password) {
     return newpassword
 }
 
-class MyUserController extends MyBaseController {
+class MyController extends MyBaseController {
 
     /**
      *
@@ -42,8 +42,8 @@ class MyUserController extends MyBaseController {
 
                 const newpassword = encryption(password);
                 try {
-                    const user = await MyUserModel.findOne({ user_name });
-                    if (!user) {
+                    const result_find_one = await MyModel.findOne({ user_name });
+                    if (!result_find_one) {
                         code = CODE.code_30001.code;
                         msg = MyConstantUtil.MSG.MSG___user_name_does_not_exist;
                         MyCommon.res_send_error(
@@ -53,7 +53,7 @@ class MyUserController extends MyBaseController {
                             res
                         );
                         return
-                    } else if (newpassword.toString() != user.password.toString()) {
+                    } else if (newpassword.toString() != result_find_one.password.toString()) {
                         console.log('登录密码错误');
                         code = CODE.code_30001.code;
                         msg = MyConstantUtil.MSG.MSG___password_error;
@@ -68,15 +68,15 @@ class MyUserController extends MyBaseController {
                     } else {
                         msg = MyConstantUtil.MSG.MSG___login_success;
 
-                        req.session.user_id = user._id;
+                        req.session.user_id = result_find_one._id;
 
-                        let balance = user.balance;
+                        let balance = result_find_one.balance;
 
                         let data = null;
                         data = {
                             'access_token' : 'access_token',
-                            'user_id' : user._id,
-                            'user' : user,
+                            'user_id' : result_find_one._id,
+                            'user' : result_find_one,
                             'balance' : balance,
                             'balance_string' : balance.toString(),
                         };
@@ -116,8 +116,8 @@ class MyUserController extends MyBaseController {
 
                 const newpassword = encryption(password);
                 try {
-                    const user = await MyUserModel.findOne({ user_name })
-                    if (user) {
+                    const result_find_one = await MyModel.findOne({ user_name })
+                    if (result_find_one) {
                         console.log('该用户已经存在');
                         code = CODE.code_30002.code;
                         msg = MyConstantUtil.MSG.MSG___this_user_name_had_exist;
@@ -134,7 +134,7 @@ class MyUserController extends MyBaseController {
                             user_name : user_name,
                             password : newpassword,
                         }
-                        let ret = await MyUserModel.create(newUser);
+                        let result_create = await MyModel.create(newUser);
 
                         /**
                          *
@@ -145,9 +145,9 @@ class MyUserController extends MyBaseController {
                           create_time: 2018-06-26T06:05:23.069Z,
                           balance: { '$numberDecimal': '0' } }
                          */
-                        console.log(ret);//返回的是插入的数据；
+                        console.log(result_create);//返回的是插入的数据；
 
-                        // const user2 = await MyUserModel.findOne({ user_name });
+                        // const user2 = await MyModel.findOne({ user_name });
                         // req.session.user_id = user2._id;
                         msg = MyConstantUtil.MSG.MSG___register_success;
                         let data = undefined;
@@ -176,4 +176,4 @@ class MyUserController extends MyBaseController {
     };
 }
 
-export default new MyUserController()
+export default new MyController()
