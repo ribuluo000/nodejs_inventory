@@ -13,8 +13,8 @@ function Md5(password) {
 }
 
 function encryption(password) {
-    const newpassword = Md5(Md5(password).substr(2, 7) + Md5(password));
-    return newpassword
+    const new_password = Md5(Md5(password).substr(2, 7) + Md5(password));
+    return new_password
 }
 
 class MyController extends MyBaseController {
@@ -40,7 +40,7 @@ class MyController extends MyBaseController {
 
                 const { user_name, password, } = fields;
 
-                const newpassword = encryption(password);
+                const new_password = encryption(password);
                 try {
                     const result_findOne = await MyModel.findOne({ user_name });
                     if (!result_findOne) {
@@ -52,8 +52,8 @@ class MyController extends MyBaseController {
                             req_url,
                             res
                         );
-                        return
-                    } else if (newpassword.toString() != result_findOne.password.toString()) {
+                        return;
+                    } else if (new_password.toString() != result_findOne.password.toString()) {
                         console.log('登录密码错误');
                         code = CODE.code_30001.code;
                         msg = MyConstantUtil.MSG.MSG___password_error;
@@ -64,7 +64,7 @@ class MyController extends MyBaseController {
                             res
                         );
 
-                        return
+                        return;
                     } else {
                         msg = MyConstantUtil.MSG.MSG___login_success;
 
@@ -87,7 +87,7 @@ class MyController extends MyBaseController {
                             res
                         );
 
-                        return
+                        return;
                     }
                 } catch (err) {
                     console.log('登录失败', err);
@@ -114,7 +114,7 @@ class MyController extends MyBaseController {
 
                 const { user_name, password, } = fields;
 
-                const newpassword = encryption(password);
+                const new_password = encryption(password);
                 try {
                     const result_findOne = await MyModel.findOne({ user_name })
                     if (result_findOne) {
@@ -127,14 +127,14 @@ class MyController extends MyBaseController {
                             req_url,
                             res
                         );
-                        return
+                        return;
                     } else {
-                        const newpassword = encryption(password);
-                        const newUser = {
+                        const new_password = encryption(password);
+                        const new_doc = {
                             user_name : user_name,
-                            password : newpassword,
-                        }
-                        let result_create = await MyModel.create(newUser);
+                            password : new_password,
+                        };
+                        let result_create = await MyModel.create(new_doc);
 
                         /**
                          *
@@ -158,7 +158,7 @@ class MyController extends MyBaseController {
                             res
                         );
 
-                        return
+                        return;
                     }
                 } catch (err) {
                     console.log('注册失败', err);
