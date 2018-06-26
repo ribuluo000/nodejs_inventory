@@ -20,7 +20,7 @@ import async from 'async';
 import MyCommon from '../common/MyCommon';
 import db from '../common/db';
 import _ from 'lodash';
-
+import {Decimal} from 'decimal.js';
 global.CODE = MyConstantUtil.CODE;
 
 
@@ -42,6 +42,7 @@ global.MyConfig = MyConfig;
 global.async = async;
 global.uuid = uuid;
 global._ = _;
+global.Decimal = Decimal;
 global.db = db;
 global.mongodb_conn1 = db.mongodb_conn1;
 global.mongodb_conn2 = db.mongodb_conn2;
@@ -49,7 +50,7 @@ global.redis_db0 = db.redis_db0;
 global.redis_db1 = db.redis_db1;
 
 
-console.log(MyConstantUtil);
+// console.log(MyConstantUtil);
 // console.log(global);
 
 

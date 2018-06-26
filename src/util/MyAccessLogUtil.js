@@ -30,8 +30,8 @@ class MyAccessLogUtil{
         })
 
         // setup the logger
-        app.use(morgan('combined', {stream: accessLogStream}))
-        app.use(morgan(morgan(function (tokens, req, res) {
+        app.use(morgan('combined', {stream: accessLogStream}));
+        app.use(morgan(function (tokens, req, res) {
             if(tokens.status(req, res)>=400 || tokens['response-time'](req, res)>1000){
                 let data={
                     system_name: 'system_name',
@@ -50,7 +50,7 @@ class MyAccessLogUtil{
                     'response-time:'+tokens['response-time'](req, res)+'ms'
                 ].join(' ')
             }
-        }, {stream: accessLogStreamShort})));
+        }, {stream: accessLogStreamShort}));
 
     }
 }

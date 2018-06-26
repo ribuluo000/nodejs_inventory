@@ -332,6 +332,9 @@ exports.check_form_data = function (code, msg, req_url, res, req, next,callback)
             });
             return false;
         }
+
+        console.log(JSON.stringify(fields));
+
         callback({
             passed:true,
             fields:fields,

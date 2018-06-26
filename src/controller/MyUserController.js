@@ -35,7 +35,6 @@ class MyUserController extends MyBaseController {
         let code = '';
 
         const callback_check_form_data = async (result_check_form_data) => {
-            console.log(JSON.stringify(result_check_form_data));
             if (result_check_form_data.passed) {
                 const fields = result_check_form_data.fields;
 
@@ -71,10 +70,15 @@ class MyUserController extends MyBaseController {
 
                         req.session.user_id = user._id;
 
+                        let balance = user.balance;
+
                         let data = null;
                         data = {
                             'access_token' : 'access_token',
                             'user_id' : user._id,
+                            'user' : user,
+                            'balance' : balance,
+                            'balance_string' : balance.toString(),
                         };
                         MyCommon.res_send_success(
                             msg,
