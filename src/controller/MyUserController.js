@@ -34,6 +34,8 @@ class MyUserController extends MyBaseController {
         let msg = '';
         let code = '';
 
+        let b = MyCommon.check_form_data(code,msg,req_url,res,req,next);
+
         const form = new formidable.IncomingForm();
         form.parse(req, async (err, fields, files) => {
             if (err) {

@@ -1,7 +1,6 @@
 
 
 let obj = {
-    "REQ_URL":"REQ_URL",
     "REQ_URL___user__login":"/user/login",
     "REQ_URL___user__register":"/user/register",
     "REQ_URL___user__get_base_info":"/user/get_base_info",
@@ -34,6 +33,9 @@ let obj = {
     "REQ_URL___product__batch__add":"/product/batch/add",
     "REQ_URL___product__batch__detail":"/product/batch/detail",
     "REQ_URL___product__batch__update_detail":"/product/batch/update_detail",
+
+    "REQ_URL___":"REQ_URL___",
+
 };
 
 
