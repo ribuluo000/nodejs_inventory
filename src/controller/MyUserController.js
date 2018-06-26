@@ -134,7 +134,19 @@ class MyUserController extends MyBaseController {
                             user_name : user_name,
                             password : newpassword,
                         }
-                        await MyUserModel.create(newUser);
+                        let ret = await MyUserModel.create(newUser);
+
+                        /**
+                         *
+                         { __v: 0,
+                          user_name: 'user_name2',
+                          password: 'q1PqLuhgbmaDU/SU+ClT/g==',
+                          _id: 5b31d7a3e227cb4455f3ed13,
+                          create_time: 2018-06-26T06:05:23.069Z,
+                          balance: { '$numberDecimal': '0' } }
+                         */
+                        console.log(ret);//返回的是插入的数据；
+
                         // const user2 = await MyUserModel.findOne({ user_name });
                         // req.session.user_id = user2._id;
                         msg = MyConstantUtil.MSG.MSG___register_success;

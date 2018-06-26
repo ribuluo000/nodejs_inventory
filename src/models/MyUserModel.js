@@ -4,6 +4,8 @@
 import db from '../common/db';
 const mongoose  = db.mongoose;
 const mongodb_conn1  = db.mongodb_conn1;
+import {Decimal} from 'decimal.js';
+
 
 const Schema = mongoose.Schema,
 
@@ -17,7 +19,7 @@ let UserSchema = new Schema({
 
     password: String,	//密码
 
-    balance: { type: Schema.Types.Decimal128 },	//余额
+    balance: { type: Schema.Types.Decimal128, default:new Decimal(0) },	//余额
 
     create_time: { type: Date, default: Date.now }	//创建时间
 
