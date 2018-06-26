@@ -10,7 +10,7 @@ exports.res_send_sys_error = function (msg, req_url, res) {
         msg : msg,
         req_url : req_url
     });
-}
+};
 
 exports.res_send_success = function (msg, data, req_url, res) {
     res.send({
@@ -285,7 +285,17 @@ exports.get_must_pass_parameter = function (req_url) {
 
 };
 
-exports.check_form_data = function (code, msg, req_url, res, req, next) {
+/**
+ *
+ * @param code
+ * @param msg
+ * @param req_url
+ * @param res
+ * @param req
+ * @param next
+ * @param callback  检验完成后的回调方法
+ */
+exports.check_form_data = function (code, msg, req_url, res, req, next,callback) {
     const form = new formidable.IncomingForm();
     form.parse(req, async (err, fields, files) => {
         if (err) {
@@ -297,6 +307,9 @@ exports.check_form_data = function (code, msg, req_url, res, req, next) {
                 req_url,
                 res
             );
+            callback({
+                passed:false,
+            });
             return false;
         }
 
@@ -314,61 +327,21 @@ exports.check_form_data = function (code, msg, req_url, res, req, next) {
                 req_url,
                 res
             );
+            callback({
+                passed:false,
+            });
             return false;
         }
-
+        callback({
+            passed:true,
+            fields:fields,
+        });
         return true;
-        
-        const { user_name, password, } = fields;
+    })
+};
 
-        const newpassword = encryption(password);
-        try {
-            const user = await MyUserModel.findOne({ user_name })
-            if (!user) {
-                code = CODE.code_30001.code;
-                msg = MyConstantUtil.MSG.MSG___user_name_does_not_exist;
-                MyCommon.res_send_error(
-                    code,
-                    msg,
-                    req_url,
-                    res
-                );
-                return
-            } else if (newpassword.toString() != user.password.toString()) {
-                console.log('登录密码错误');
-                code = CODE.code_30001.code;
-                msg = MyConstantUtil.MSG.MSG___password_error;
-                MyCommon.res_send_error(
-                    code,
-                    msg,
-                    req_url,
-                    res
-                );
-
-                return
-            } else {
-                msg = MyConstantUtil.MSG.MSG___login_success;
-
-                req.session.user_id = user._id;
-
-                let data = null;
-                data = {
-                    'access_token' : 'access_token',
-                    'user_id' : user._id,
-                };
-                MyCommon.res_send_success(
-                    msg,
-                    data,
-                    req_url,
-                    res
-                );
-
-                return
-            }
-        } catch (err) {
-            console.log('登录失败', err);
-            msg = MyConstantUtil.MSG.MSG___login_failure;
-            MyLog.error(`
+exports.on_catch_error = function (msg, req_url, res,err) {
+    MyLog.error(`
                 
                 err___
                 ${req_url}__\n
@@ -376,16 +349,14 @@ exports.check_form_data = function (code, msg, req_url, res, req, next) {
                 ${JSON.stringify(err)}__\n
                 `);
 
-            MyCommon.res_send_sys_error(
-                msg,
-                req_url,
-                res
-            );
+    MyCommon.res_send_sys_error(
+        msg,
+        req_url,
+        res
+    );
 
-            return
-        }
-    })
 };
+
 
 
 
