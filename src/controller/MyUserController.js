@@ -38,7 +38,10 @@ class MyController extends MyBaseController {
             if (result_check_form_data.passed) {
                 const fields = result_check_form_data.fields;
 
-                const { user_name, password, } = fields;
+                const {
+                    user_name,
+                    password,
+                } = fields;
 
                 const new_password = encryption(password);
                 try {
@@ -112,7 +115,10 @@ class MyController extends MyBaseController {
             if (result_check_form_data.passed) {
                 const fields = result_check_form_data.fields;
 
-                const { user_name, password, } = fields;
+                const {
+                    user_name,
+                    password,
+                } = fields;
 
                 const new_password = encryption(password);
                 try {
