@@ -98,25 +98,6 @@ class MyController extends MyBaseController {
                     const callback_result_findByIdAndUpdate_exec = (err, doc) => {
                         if (err) {
                             console.log('更新失败', err);
-
-                            console.log('name:', err.name);
-                            console.log('message:', err.message);
-                            console.log('codeName:', err.codeName);
-                            if (err.codeName === MyConstantUtil.TYPE_ERROR.DuplicateKey) {
-                                let duplicate_value = '';
-                                duplicate_value = err.message.split('\"')[ 1 ];
-
-                                code = CODE.code_30001.code;
-                                msg = duplicate_value + MyConstantUtil.MSG.MSG___had_exist;
-                                MyCommon.res_send_error(
-                                    code,
-                                    msg,
-                                    req_url,
-                                    res
-                                );
-                                return;
-                            }
-
                             msg = MyConstantUtil.MSG.MSG___update_customer_failure;
                             MyCommon.on_catch_error(msg, req_url, res, err, fields);
 

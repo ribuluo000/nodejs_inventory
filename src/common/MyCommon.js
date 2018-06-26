@@ -43,23 +43,19 @@ exports.get_must_pass_parameter = function (req_url) {
         REQ_URL___provider__detail,
         REQ_URL___provider__update_detail,
 
-
         REQ_URL___customer__get_list,
         REQ_URL___customer__add,
         REQ_URL___customer__detail,
         REQ_URL___customer__update_detail,
 
-
         REQ_URL___bill__get_list,
         REQ_URL___bill__add,
         REQ_URL___bill__detail,
-
 
         REQ_URL___product__get_list,
         REQ_URL___product__add,
         REQ_URL___product__detail,
         REQ_URL___product__update_detail,
-
 
         REQ_URL___product__batch__get_list,
         REQ_URL___product__batch__add,
@@ -295,7 +291,7 @@ exports.get_must_pass_parameter = function (req_url) {
  * @param next
  * @param callback  检验完成后的回调方法
  */
-exports.check_form_data = function (code, msg, req_url, res, req, next,callback) {
+exports.check_form_data = function (code, msg, req_url, res, req, next, callback) {
     const form = new formidable.IncomingForm();
     form.parse(req, async (err, fields, files) => {
         console.log(JSON.stringify(fields));
@@ -335,16 +331,35 @@ exports.check_form_data = function (code, msg, req_url, res, req, next,callback)
             return false;
         }
 
-
         callback({
-            passed:true,
-            fields:fields,
+            passed : true,
+            fields : fields,
         });
         return true;
     })
 };
 
-exports.on_catch_error = function (msg, req_url, res,err,fields) {
+exports.on_catch_error = function (msg, req_url, res, err, fields) {
+
+    console.log('name:', err.name);
+    console.log('message:', err.message);
+    console.log('codeName:', err.codeName);
+    let code = '10001';
+    if (err.codeName === MyConstantUtil.TYPE_ERROR.DuplicateKey || err.message.indexOf('duplicate key error') > -1) {
+        let duplicate_value = '';
+        duplicate_value = err.message.split('\"')[ 1 ];
+
+        code = CODE.code_30001.code;
+        msg = duplicate_value + MyConstantUtil.MSG.MSG___had_exist;
+        MyCommon.res_send_error(
+            code,
+            msg,
+            req_url,
+            res
+        );
+        return;
+    }
+
     MyLog.error(`
                 
                 err___
