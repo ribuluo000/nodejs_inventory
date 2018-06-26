@@ -3,7 +3,7 @@
  */
 'use strict';
 
-import MyModel from "../models/MyProviderModel";
+import MyModel from "../models/MyProductModel";
 import MyBaseController from "./base/MyBaseController";
 
 class MyController extends MyBaseController {
@@ -19,12 +19,11 @@ class MyController extends MyBaseController {
     }
 
     async add(req, res, next) {
-        let req_url = MyConstantUtil.REQ_URL.REQ_URL___provider__add;
+        let req_url = MyConstantUtil.REQ_URL.REQ_URL___product__add;
         let msg = '';
         let code = '';
 
         const callback_check_form_data = async (result_check_form_data) => {
-
             if (result_check_form_data.passed) {
                 const fields = result_check_form_data.fields;
 
@@ -33,7 +32,6 @@ class MyController extends MyBaseController {
                     user_id,
                     name,
                     remark,
-                    telephone,
                 } = fields;
 
                 try {
@@ -42,11 +40,10 @@ class MyController extends MyBaseController {
                         object_id_created_by : user_id,
                         name,
                         remark,
-                        telephone,
                     };
                     let result_create = await MyModel.create(new_doc);
                     console.log(result_create);
-                    msg = MyConstantUtil.MSG.MSG___add_provider_success;
+                    msg = MyConstantUtil.MSG.MSG___add_product_success;
                     let data = undefined;
                     MyCommon.res_send_success(
                         msg,
@@ -57,7 +54,7 @@ class MyController extends MyBaseController {
                     return;
                 } catch (err) {
                     console.log('添加失败', err);
-                    msg = MyConstantUtil.MSG.MSG___add_provider_failure;
+                    msg = MyConstantUtil.MSG.MSG___add_product_failure;
                     MyCommon.on_catch_error(msg, req_url, res, err, fields);
 
                 }
@@ -70,12 +67,12 @@ class MyController extends MyBaseController {
     };
 
     async update_detail(req, res, next) {
-        let req_url = MyConstantUtil.REQ_URL.REQ_URL___provider__update_detail;
+        let req_url = MyConstantUtil.REQ_URL.REQ_URL___product__update_detail;
         let msg = '';
         let code = '';
 
         const callback_check_form_data = async (result_check_form_data) => {
-
+            
             if (result_check_form_data.passed) {
                 const fields = result_check_form_data.fields;
 
@@ -84,7 +81,6 @@ class MyController extends MyBaseController {
                     user_id,
                     name,
                     remark,
-                    telephone,
                     id,
 
                 } = fields;
@@ -93,7 +89,6 @@ class MyController extends MyBaseController {
                     let update = {
                         name,
                         remark,
-                        telephone,
                     };
                     const result_findByIdAndUpdate = MyModel.findByIdAndUpdate(id, update,);
                     const callback_result_findByIdAndUpdate_exec = (err, doc) => {
@@ -118,7 +113,7 @@ class MyController extends MyBaseController {
                                 return;
                             }
 
-                            msg = MyConstantUtil.MSG.MSG___update_provider_failure;
+                            msg = MyConstantUtil.MSG.MSG___update_product_failure;
                             MyCommon.on_catch_error(msg, req_url, res, err, fields);
 
                             return;
@@ -126,7 +121,7 @@ class MyController extends MyBaseController {
 
                         console.log('更新成功', doc);
 
-                        msg = MyConstantUtil.MSG.MSG___update_provider_success;
+                        msg = MyConstantUtil.MSG.MSG___update_product_success;
                         let data = undefined;
                         MyCommon.res_send_success(
                             msg,
@@ -142,7 +137,7 @@ class MyController extends MyBaseController {
                 } catch (err) {
                     console.log('更新失败', err);
 
-                    msg = MyConstantUtil.MSG.MSG___update_provider_failure;
+                    msg = MyConstantUtil.MSG.MSG___update_product_failure;
                     MyCommon.on_catch_error(msg, req_url, res, err, fields);
 
                 }
@@ -155,12 +150,12 @@ class MyController extends MyBaseController {
     };
 
     async detail(req, res, next) {
-        let req_url = MyConstantUtil.REQ_URL.REQ_URL___provider__detail;
+        let req_url = MyConstantUtil.REQ_URL.REQ_URL___product__detail;
         let msg = '';
         let code = '';
 
         const callback_check_form_data = async (result_check_form_data) => {
-
+            
             if (result_check_form_data.passed) {
                 const fields = result_check_form_data.fields;
 
@@ -174,9 +169,9 @@ class MyController extends MyBaseController {
                     const result_findById = await MyModel.findById(id);
                     console.log('result_findById', result_findById);
                     if (!result_findById) {
-                        console.log('查询供应商失败');
+                        console.log('查询产品失败');
                         code = CODE.code_30001.code;
-                        msg = MyConstantUtil.MSG.MSG___this_provider_does_not_exist;
+                        msg = MyConstantUtil.MSG.MSG___this_product_does_not_exist;
                         MyCommon.res_send_error(
                             code,
                             msg,
@@ -185,7 +180,7 @@ class MyController extends MyBaseController {
                         );
                         return;
                     } else {
-                        msg = MyConstantUtil.MSG.MSG___find_provider_success;
+                        msg = MyConstantUtil.MSG.MSG___find_product_success;
 
                         let data = null;
                         data = result_findById;
@@ -198,8 +193,8 @@ class MyController extends MyBaseController {
                         return;
                     }
                 } catch (err) {
-                    console.log('查询供应商失败', err);
-                    msg = MyConstantUtil.MSG.MSG___find_provider_failure;
+                    console.log('查询产品失败', err);
+                    msg = MyConstantUtil.MSG.MSG___find_product_failure;
                     MyCommon.on_catch_error(msg, req_url, res, err, fields);
 
                 }
@@ -211,7 +206,7 @@ class MyController extends MyBaseController {
     };
 
     async get_list(req, res, next) {
-        let req_url = MyConstantUtil.REQ_URL.REQ_URL___provider__get_list;
+        let req_url = MyConstantUtil.REQ_URL.REQ_URL___product__get_list;
         let msg = '';
         let code = '';
 
@@ -246,8 +241,8 @@ class MyController extends MyBaseController {
                         );
                         return;
                     } else {
-                        console.log('查询供应商列表成功');
-                        msg = MyConstantUtil.MSG.MSG___find_provider_list_success;
+                        console.log('查询产品列表成功');
+                        msg = MyConstantUtil.MSG.MSG___find_product_list_success;
 
                         let data = null;
                         data = {
@@ -263,8 +258,8 @@ class MyController extends MyBaseController {
                         return;
                     }
                 } catch (err) {
-                    console.log('查询供应商列表失败', err);
-                    msg = MyConstantUtil.MSG.MSG___find_provider_list_failure;
+                    console.log('查询产品列表失败', err);
+                    msg = MyConstantUtil.MSG.MSG___find_product_list_failure;
                     MyCommon.on_catch_error(msg, req_url, res, err, fields);
 
                 }

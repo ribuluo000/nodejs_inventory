@@ -37,7 +37,6 @@ class MyAccessLogUtil{
                     system_name: 'system_name',
                     http_type:tokens.method(req, res),
                     http_code:tokens.status(req, res),
-                    api_name:req.body.api_name,
                     data:req.body,   //传输数据
                     response_time:tokens['response-time'](req, res), //响应时间
                     day:new Date().getTime(),
@@ -45,7 +44,7 @@ class MyAccessLogUtil{
                 YBSystemModel.create(data);
                 return [
                     tokens.method(req, res)+' /',
-                    req.body.api_name+': '+JSON.stringify(req.body),
+                    ': '+JSON.stringify(req.body),
                     'Code:'+tokens.status(req, res),
                     'response-time:'+tokens['response-time'](req, res)+'ms'
                 ].join(' ')
