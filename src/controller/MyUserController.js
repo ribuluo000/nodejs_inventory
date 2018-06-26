@@ -95,7 +95,7 @@ class MyController extends MyBaseController {
                 } catch (err) {
                     console.log('登录失败', err);
                     msg = MyConstantUtil.MSG.MSG___login_failure;
-                    MyCommon.on_catch_error(msg, req_url, res, err);
+                    MyCommon.on_catch_error(msg, req_url, res, err,fields);
 
                 }
             }
@@ -170,7 +170,7 @@ class MyController extends MyBaseController {
                     console.log('注册失败', err);
 
                     msg = MyConstantUtil.MSG.MSG___register_failure;
-                    MyCommon.on_catch_error(msg, req_url, res, err);
+                    MyCommon.on_catch_error(msg, req_url, res, err,fields);
 
                 }
             }

@@ -249,7 +249,7 @@ exports.get_must_pass_parameter = function (req_url) {
             must_pass_parameter.push(
                 PARAM___access_token,
                 PARAM___user_id,
-                PARAM___search_key,
+                // PARAM___search_key,
                 PARAM___page_number,
                 PARAM___page_size,
             );
@@ -259,7 +259,7 @@ exports.get_must_pass_parameter = function (req_url) {
             must_pass_parameter.push(
                 PARAM___access_token,
                 PARAM___user_id,
-                PARAM___search_key,
+                // PARAM___search_key,
                 PARAM___page_number,
                 PARAM___page_size,
                 PARAM___product_id,
@@ -298,6 +298,8 @@ exports.get_must_pass_parameter = function (req_url) {
 exports.check_form_data = function (code, msg, req_url, res, req, next,callback) {
     const form = new formidable.IncomingForm();
     form.parse(req, async (err, fields, files) => {
+        console.log(JSON.stringify(fields));
+
         if (err) {
             code = CODE.code_40001.code;
             msg = MyConstantUtil.MSG.MSG___request_data_error;
@@ -307,9 +309,9 @@ exports.check_form_data = function (code, msg, req_url, res, req, next,callback)
                 req_url,
                 res
             );
-            callback({
-                passed:false,
-            });
+            // callback({
+            //     passed:false,
+            // });
             return false;
         }
 
@@ -327,13 +329,12 @@ exports.check_form_data = function (code, msg, req_url, res, req, next,callback)
                 req_url,
                 res
             );
-            callback({
-                passed:false,
-            });
+            // callback({
+            //     passed:false,
+            // });
             return false;
         }
 
-        console.log(JSON.stringify(fields));
 
         callback({
             passed:true,
@@ -343,13 +344,14 @@ exports.check_form_data = function (code, msg, req_url, res, req, next,callback)
     })
 };
 
-exports.on_catch_error = function (msg, req_url, res,err) {
+exports.on_catch_error = function (msg, req_url, res,err,fields) {
     MyLog.error(`
                 
                 err___
-                ${req_url}__\n
-                ${msg}__\n
-                ${JSON.stringify(err)}__\n
+                msg::${req_url}__\n
+                req_url::${msg}__\n
+                err::${JSON.stringify(err)}__\n
+                fields::${JSON.stringify(fields)}__\n
                 `);
 
     MyCommon.res_send_sys_error(
