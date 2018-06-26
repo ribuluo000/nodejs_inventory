@@ -3,6 +3,7 @@ import redis from "redis";
 import config from "./config";
 import bluebird from "bluebird";
 import chalk from "chalk";
+import mongoose_paginate from "mongoose-paginate";
 mongoose.Promise = bluebird;
 
 /*
@@ -73,6 +74,7 @@ redis_db1.on('error', function (error) {
 
 export default {
     mongoose : mongoose,
+    mongoose_paginate : mongoose_paginate,
     mongodb_conn1 : conn1,
     mongodb_conn2 : conn2,
     redis_db0 : client,

@@ -3,6 +3,7 @@
  */
 import db from '../common/db';
 const mongoose  = db.mongoose;
+const mongoose_paginate  = db.mongoose_paginate;
 const mongodb_conn1  = db.mongodb_conn1;
 import {Decimal} from 'decimal.js';
 
@@ -13,9 +14,9 @@ const Schema = mongoose.Schema,
 
 //用户
 
-let UserSchema = new Schema({
+let schema = new Schema({
 
-    user_name: String,	//用户名
+    user_name: {type:String,unique: true},	//用户名
 
     password: String,	//密码
 
@@ -26,10 +27,11 @@ let UserSchema = new Schema({
 });
 
 
-UserSchema.index({ user_name: 1}); // schema level
+schema.index({ user_name: 1}); // schema level
 
-UserSchema.index({ balance: -1 , user_name: 1}); // schema level
+schema.index({ balance: -1 , user_name: 1}); // schema level
 
-const User = mongodb_conn1.model('User', UserSchema);
+schema.plugin(mongoose_paginate);
+const User = mongodb_conn1.model('User', schema);
 
 export default User;

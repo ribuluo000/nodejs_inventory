@@ -3,6 +3,7 @@
  */
 import db from '../common/db';
 const mongoose  = db.mongoose;
+const mongoose_paginate  = db.mongoose_paginate;
 const mongodb_conn1  = db.mongodb_conn1;
 const Schema = mongoose.Schema,
 
@@ -11,11 +12,11 @@ const Schema = mongoose.Schema,
 
 //产品
 
-var ProductSchema = new Schema({
+let schema = new Schema({
 
-    object_id_created_by: [Schema.Types.ObjectId],	//创建人 object_id
+    object_id_created_by: Schema.Types.ObjectId,	//创建人 object_id
 
-    name: String,		//名称
+    name: {type:String,unique: true},		//名称
 
     remark: String,	//备注
 
@@ -27,14 +28,15 @@ var ProductSchema = new Schema({
 
 
 
-ProductSchema.index({
+schema.index({
 
     object_id_created_by: 1 ,
 
     create_time: -1
 
 }); // schema level
+schema.plugin(mongoose_paginate);
 
-const Product = mongodb_conn1.model('Product', ProductSchema);
+const Product = mongodb_conn1.model('Product', schema);
 
 export default Product;

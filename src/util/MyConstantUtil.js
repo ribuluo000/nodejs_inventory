@@ -12,6 +12,10 @@ let obj = {
     PARAM:PARAM,
     MSG:MSG,
     CODE:CODE,
+
+    TYPE_ERROR:{
+        'DuplicateKey':'DuplicateKey'
+    }
 };
 
 

@@ -1,13 +1,14 @@
 
 import db from '../common/db';
 const mongoose  = db.mongoose;
+const mongoose_paginate  = db.mongoose_paginate;
 const mongodb_conn1  = db.mongodb_conn1;
 
 const Schema = mongoose.Schema,
 
     ObjectId = Schema.ObjectId;
 
-let CXYLogSchema = new Schema({
+let schema = new Schema({
     system_name: { type: String, required: false },  //
     http_type:{type: String, required: false},
     http_code:{type: Number, required: false},
@@ -17,7 +18,8 @@ let CXYLogSchema = new Schema({
     day:{type: Number, required: false}
 });
 
+schema.plugin(mongoose_paginate);
 
-const CXYLog = mongodb_conn1.model('CXYLog', CXYLogSchema);
+const CXYLog = mongodb_conn1.model('CXYLog', schema);
 
 export default CXYLog;

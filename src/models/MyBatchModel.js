@@ -3,6 +3,7 @@
  */
 import db from '../common/db';
 const mongoose  = db.mongoose;
+const mongoose_paginate  = db.mongoose_paginate;
 const mongodb_conn1  = db.mongodb_conn1;
 const Schema = mongoose.Schema,
 
@@ -11,13 +12,13 @@ const Schema = mongoose.Schema,
 
 //批次
 
-var BatchSchema = new Schema({
+let schema = new Schema({
 
     object_id_product: [Schema.Types.ObjectId],	// 产品 object_id
 
     object_id_created_by: [Schema.Types.ObjectId],	//创建人 object_id
 
-    name: String,		//名称
+    name: {type:String,unique: true},		//名称
 
     remark: String,	//备注
 
@@ -30,7 +31,7 @@ var BatchSchema = new Schema({
 
 
 
-BatchSchema.index({
+schema.index({
 
     object_id_product: 1 ,
 
@@ -39,7 +40,8 @@ BatchSchema.index({
     create_time: -1
 
 }); // schema level
+schema.plugin(mongoose_paginate);
 
-const Batch = mongodb_conn1.model('Batch', BatchSchema);
+const Batch = mongodb_conn1.model('Batch', schema);
 
 export default Batch;
