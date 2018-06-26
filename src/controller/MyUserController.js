@@ -42,8 +42,8 @@ class MyController extends MyBaseController {
 
                 const newpassword = encryption(password);
                 try {
-                    const result_find_one = await MyModel.findOne({ user_name });
-                    if (!result_find_one) {
+                    const result_findOne = await MyModel.findOne({ user_name });
+                    if (!result_findOne) {
                         code = CODE.code_30001.code;
                         msg = MyConstantUtil.MSG.MSG___user_name_does_not_exist;
                         MyCommon.res_send_error(
@@ -53,7 +53,7 @@ class MyController extends MyBaseController {
                             res
                         );
                         return
-                    } else if (newpassword.toString() != result_find_one.password.toString()) {
+                    } else if (newpassword.toString() != result_findOne.password.toString()) {
                         console.log('登录密码错误');
                         code = CODE.code_30001.code;
                         msg = MyConstantUtil.MSG.MSG___password_error;
@@ -68,15 +68,15 @@ class MyController extends MyBaseController {
                     } else {
                         msg = MyConstantUtil.MSG.MSG___login_success;
 
-                        req.session.user_id = result_find_one._id;
+                        req.session.user_id = result_findOne._id;
 
-                        let balance = result_find_one.balance;
+                        let balance = result_findOne.balance;
 
                         let data = null;
                         data = {
                             'access_token' : 'access_token',
-                            'user_id' : result_find_one._id,
-                            'user' : result_find_one,
+                            'user_id' : result_findOne._id,
+                            'user' : result_findOne,
                             'balance' : balance,
                             'balance_string' : balance.toString(),
                         };
@@ -116,8 +116,8 @@ class MyController extends MyBaseController {
 
                 const newpassword = encryption(password);
                 try {
-                    const result_find_one = await MyModel.findOne({ user_name })
-                    if (result_find_one) {
+                    const result_findOne = await MyModel.findOne({ user_name })
+                    if (result_findOne) {
                         console.log('该用户已经存在');
                         code = CODE.code_30002.code;
                         msg = MyConstantUtil.MSG.MSG___this_user_name_had_exist;
