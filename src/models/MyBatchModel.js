@@ -14,9 +14,9 @@ const Schema = mongoose.Schema,
 
 let schema = new Schema({
 
-    object_id_product: [Schema.Types.ObjectId],	// 产品 object_id
+    object_id_product: Schema.Types.ObjectId,	// 产品 object_id
 
-    object_id_created_by: [Schema.Types.ObjectId],	//创建人 object_id
+    object_id_created_by: Schema.Types.ObjectId,	//创建人 object_id
 
     name: {type:String,unique: true},		//名称
 

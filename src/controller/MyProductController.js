@@ -72,7 +72,7 @@ class MyController extends MyBaseController {
         let code = '';
 
         const callback_check_form_data = async (result_check_form_data) => {
-            
+
             if (result_check_form_data.passed) {
                 const fields = result_check_form_data.fields;
 
@@ -92,6 +92,8 @@ class MyController extends MyBaseController {
                     };
                     const result_findByIdAndUpdate = MyModel.findByIdAndUpdate(id, update,);
                     const callback_result_findByIdAndUpdate_exec = (err, doc) => {
+                        console.log('更新', err, doc);
+
                         if (err) {
                             console.log('更新失败', err);
 
@@ -101,6 +103,18 @@ class MyController extends MyBaseController {
                             return;
                         }
 
+                        if (!doc) {
+                            code = CODE.code_30001.code;
+                            msg = MyConstantUtil.MSG.MSG___this_product_does_not_exist;
+                            MyCommon.res_send_error(
+                                code,
+                                msg,
+                                req_url,
+                                res
+                            );
+
+                            return;
+                        }
                         console.log('更新成功', doc);
 
                         msg = MyConstantUtil.MSG.MSG___update_product_success;
@@ -137,7 +151,7 @@ class MyController extends MyBaseController {
         let code = '';
 
         const callback_check_form_data = async (result_check_form_data) => {
-            
+
             if (result_check_form_data.passed) {
                 const fields = result_check_form_data.fields;
 

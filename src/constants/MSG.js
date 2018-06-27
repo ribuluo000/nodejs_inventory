@@ -58,6 +58,17 @@ let obj = {
     "MSG___update_product_failure":'更新产品失败',
     "MSG___find_product_list_success":'查询产品列表成功',
     "MSG___find_product_list_failure":'查询产品列表失败',
+    
+    "MSG___this_product_batch_name_had_exist":'该产品批次名称已经存在',
+    "MSG___this_product_batch_does_not_exist":'该产品批次不存在',
+    "MSG___add_product_batch_success":'添加产品批次成功',
+    "MSG___add_product_batch_failure":'添加产品批次失败',
+    "MSG___find_product_batch_success":'查询产品批次成功',
+    "MSG___find_product_batch_failure":'查询产品批次失败',
+    "MSG___update_product_batch_success":'更新产品批次成功',
+    "MSG___update_product_batch_failure":'更新产品批次失败',
+    "MSG___find_product_batch_list_success":'查询产品批次列表成功',
+    "MSG___find_product_batch_list_failure":'查询产品批次列表失败',
 
 
     "MSG___":"MSG___",
