@@ -1,4 +1,4 @@
-{
+export default {
     "code_0":{
         "code":"0",
         "code_description":"成功(查询或操作)"

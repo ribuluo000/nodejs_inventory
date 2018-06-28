@@ -4,7 +4,7 @@
 
 
 
-let obj = {
+export default {
     "PARAM___user_name":"user_name",
     "PARAM___password":"password",
     "PARAM___repeat_password":"repeat_password",
@@ -36,4 +36,3 @@ let obj = {
 };
 
 
-export default obj;

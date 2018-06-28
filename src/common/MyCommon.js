@@ -228,9 +228,9 @@ exports.get_must_pass_parameter = function (req_url) {
 
 
                  */
-                PARAM___provider,
-                PARAM___customer,
-                PARAM___products,
+                // PARAM___provider,
+                // PARAM___customer,
+                // PARAM___products,
             );
             break;
 
@@ -345,7 +345,7 @@ exports.on_catch_error = function (msg, req_url, res, err, fields) {
     console.log('message:', err.message);
     console.log('codeName:', err.codeName);
     let code = '10001';
-    if (err.codeName === MyConstantUtil.TYPE_ERROR.DuplicateKey || err.message.indexOf('duplicate key error') > -1) {
+    if (err.codeName === MyConstantUtil.TYPE.TYPE_ERROR.DuplicateKey || (err.message && err.message.indexOf('duplicate key error') > -1)) {
         let duplicate_value = '';
         duplicate_value = err.message.split('\"')[ 1 ];
 

@@ -22,6 +22,10 @@ import db from '../common/db';
 import _ from 'lodash';
 import {Decimal} from 'decimal.js';
 global.CODE = MyConstantUtil.CODE;
+global.TYPE = MyConstantUtil.TYPE;
+global.MSG = MyConstantUtil.MSG;
+global.REQ_URL = MyConstantUtil.REQ_URL;
+global.PARAM = MyConstantUtil.PARAM;
 
 
 console.log(i18n.__('Welcome'));

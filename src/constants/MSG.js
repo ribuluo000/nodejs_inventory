@@ -4,7 +4,7 @@
 
 
 
-let obj = {
+export default {
     "MSG___request_data_error":"表单信息错误",
     "MSG___request_data_miss":"请求数据缺失",
 
@@ -71,10 +71,26 @@ let obj = {
     "MSG___find_product_batch_list_failure":'查询产品批次列表失败',
 
 
+    "MSG___this_bill_name_had_exist":'该账单已经存在',
+    "MSG___this_bill_does_not_exist":'该账单不存在',
+    "MSG___add_bill_success":'添加账单成功',
+    "MSG___add_bill_failure":'添加账单失败',
+    "MSG___find_bill_success":'查询账单成功',
+    "MSG___find_bill_failure":'查询账单失败',
+    "MSG___update_bill_success":'更新账单成功',
+    "MSG___update_bill_failure":'更新账单失败',
+    "MSG___find_bill_list_success":'查询账单列表成功',
+    "MSG___find_bill_list_failure":'查询账单列表失败',
+
+    "MSG___bill_type_is_incorrect":'账单类型不正确',
+    "MSG___provider_is_incorrect":'供应商不正确',
+    "MSG___customer_is_incorrect":'客户不正确',
+    "MSG___products_is_incorrect":'产品不正确',
+
+
     "MSG___":"MSG___",
     "MSG___":"MSG___",
 
 };
 
 
-export default obj;

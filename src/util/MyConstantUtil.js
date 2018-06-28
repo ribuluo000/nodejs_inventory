@@ -2,9 +2,10 @@
  * Created by nick on 2018/1/27.
  */
 import REQ_URL from '../constants/REQ_URL';
-import MSG from '../constants/MSG';
+import MSG from '../constants/MSG.js';
 import PARAM from '../constants/PARAM';
-import CODE from '../constants/CODE.json';
+import CODE from '../constants/CODE.js';
+import TYPE from '../constants/TYPE.js';
 let obj = {
     DEBUG:'DEBUG',
     RELEASE:'RELEASE',
@@ -12,10 +13,9 @@ let obj = {
     PARAM:PARAM,
     MSG:MSG,
     CODE:CODE,
+    TYPE:TYPE,
 
-    TYPE_ERROR:{
-        'DuplicateKey':'DuplicateKey'
-    }
+
 };
 
 

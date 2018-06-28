@@ -1,6 +1,6 @@
 
 
-let obj = {
+export default {
     "REQ_URL___user__login":"/user/login",
     "REQ_URL___user__register":"/user/register",
     "REQ_URL___user__get_base_info":"/user/get_base_info",
@@ -39,4 +39,3 @@ let obj = {
 };
 
 
-export default obj;

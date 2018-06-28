@@ -79,26 +79,35 @@ function YBVerify() {
                     }
                     break;
                 case PARAM___products:
-                    if (
-                        !value[ PARAM___object_id_product ]
-                        ||
-                        !value[ PARAM___object_id_batch ]
-                        ||
-                        !value[ PARAM___name_product ]
-                        ||
-                        !value[ PARAM___name_batch ]
-                        ||
-                        !value[ PARAM___price ]
-                        ||
-                        !value[ PARAM___count ]
-                        ||
-                        !value[ PARAM___total_price ]
-                    ) {
+                    if (value.length > 0) {
+                        let value_0 = value[ 0 ];
+                        if (
+                            !value_0[ PARAM___object_id_product ]
+                            ||
+                            !value_0[ PARAM___object_id_batch ]
+                            ||
+                            !value_0[ PARAM___name_product ]
+                            ||
+                            !value_0[ PARAM___name_batch ]
+                            ||
+                            !value_0[ PARAM___price ]
+                            ||
+                            !value_0[ PARAM___count ]
+                            ||
+                            !value_0[ PARAM___total_price ]
+                        ) {
+                            return {
+                                passed : false,
+                                key_name : key,
+                            };
+                        }
+                    } else {
                         return {
                             passed : false,
                             key_name : key,
                         };
                     }
+
                     break;
             }
         }

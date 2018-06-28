@@ -5,6 +5,8 @@ import db from '../common/db';
 const mongoose  = db.mongoose;
 const mongoose_paginate  = db.mongoose_paginate;
 const mongodb_conn1  = db.mongodb_conn1;
+import {Decimal} from 'decimal.js';
+
 const Schema = mongoose.Schema,
 
     ObjectId = Schema.ObjectId;
@@ -24,11 +26,11 @@ var BillProductListItemSchema = new Schema({
 
     name_batch: String,		//批次名称
 
-    price: { type: Schema.Types.Decimal128, default: 0 },		//产品单价
+    price: { type: Schema.Types.Decimal128, default: new Decimal(0) },		//产品单价
 
-    count: { type: Schema.Types.Decimal128, default: 0 },		//产品数量
+    count: { type: Schema.Types.Decimal128, default: new Decimal(0) },		//产品数量
 
-    total_price: { type: Schema.Types.Decimal128, default: 0 },		//产品总价单价
+    total_price: { type: Schema.Types.Decimal128, default: new Decimal(0) },		//产品总价单价
 
     remark: String	//备注
 
@@ -68,11 +70,11 @@ var schema = new Schema({
 
     object_id_created_by: Schema.Types.ObjectId,	//创建人 object_id
 
-    order_number: String,		//订单号
+    order_number: {type:String,unique: true},		//订单号
 
-    type: String,		//账单类型
+    type: String,		//账单类型  1-付钱，2-收钱
 
-    transaction_amount:{ type: Schema.Types.Decimal128, default: 0 }, //交易金额
+    transaction_amount:{ type: Schema.Types.Decimal128, default: new Decimal(0) }, //交易金额
 
     remark: String,	//备注
 
