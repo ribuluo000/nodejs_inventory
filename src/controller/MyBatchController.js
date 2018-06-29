@@ -179,7 +179,7 @@ class MyController extends MyBaseController {
                     } else {
                         msg = MyConstantUtil.MSG.MSG___find_product_batch_success;
 
-                        let data = null;
+                        let data = undefined;
                         data = result_findById;
                         MyCommon.res_send_success(
                             msg,
@@ -242,7 +242,7 @@ class MyController extends MyBaseController {
                         console.log('查询产品批次列表成功');
                         msg = MyConstantUtil.MSG.MSG___find_product_batch_list_success;
 
-                        let data = null;
+                        let data = undefined;
                         data = {
                             'total_count' : result_paginate.total,
                             'data_list' : result_paginate.docs,

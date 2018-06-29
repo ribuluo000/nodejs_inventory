@@ -75,7 +75,7 @@ class MyController extends MyBaseController {
 
                         let balance = result_findOne.balance;
 
-                        let data = null;
+                        let data = undefined;
                         data = {
                             'access_token' : 'access_token',
                             'user_id' : result_findOne._id,
@@ -179,6 +179,60 @@ class MyController extends MyBaseController {
 
         MyCommon.check_form_data(code, msg, req_url, res, req, next, callback_check_form_data);
 
+    };
+
+    async logout(req, res, next) {
+        let req_url = MyConstantUtil.REQ_URL.REQ_URL___user__logout;
+        let msg = '';
+        let code = '';
+
+        const callback_check_form_data = async (result_check_form_data) => {
+
+            if (result_check_form_data.passed) {
+                const fields = result_check_form_data.fields;
+
+                const {
+                    access_token,
+                    user_id,
+
+                } = fields;
+                try {
+
+                    //todo need change 删除 access_token
+
+                    if (!true) {
+                        console.log('退出登录失败');
+                        code = CODE.code_30001.code;
+                        msg = MyConstantUtil.MSG.MSG___logout_failure;
+                        MyCommon.res_send_error(
+                            code,
+                            msg,
+                            req_url,
+                            res
+                        );
+                        return;
+                    } else {
+                        msg = MyConstantUtil.MSG.MSG___logout_success;
+                        let data = undefined;
+                        MyCommon.res_send_success(
+                            msg,
+                            data,
+                            req_url,
+                            res
+                        );
+                        return;
+                    }
+                } catch (err) {
+                    console.log('退出登录失败', err);
+                    msg = MyConstantUtil.MSG.MSG___logout_failure;
+                    MyCommon.on_catch_error(msg, req_url, res, err, fields);
+
+                }
+            }
+
+        };
+
+        MyCommon.check_form_data(code, msg, req_url, res, req, next, callback_check_form_data);
     };
 }
 

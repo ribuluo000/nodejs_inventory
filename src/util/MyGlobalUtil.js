@@ -6,6 +6,7 @@ import i18n_module from 'i18n-nodejs';
 var i18n = new i18n_module(MyConfig.i18n_config.lang, MyConfig.i18n_config.langFile);
 global.i18n = i18n;
 
+import MyDataUtil from './MyDataUtil';
 import MyConstantUtil from './MyConstantUtil';
 import MyEncryptionUtil from './MyEncryptionUtil';
 import MyArrayUtil from './MyArrayUtil';
@@ -31,6 +32,7 @@ global.PARAM = MyConstantUtil.PARAM;
 console.log(i18n.__('Welcome'));
 
 // 全局打印模块
+global.MyDataUtil = MyDataUtil;
 global.MyConstantUtil = MyConstantUtil;
 global.MyEncryptionUtil = MyEncryptionUtil;
 global.MyArrayUtil = MyArrayUtil;

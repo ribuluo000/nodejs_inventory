@@ -194,6 +194,8 @@ class MyController extends MyBaseController {
 
                 try {
 
+                    let order_number = MyDataUtil.get_bill_order_number(fields);
+
                     const new_doc = {
                         object_id_created_by : user_id,
                         name,
@@ -204,6 +206,8 @@ class MyController extends MyBaseController {
                         provider,
                         customer,
                         products,
+
+                        order_number,
                     };
                     let result_create = await MyModel.create(new_doc);
                     console.log(result_create);
@@ -263,7 +267,7 @@ class MyController extends MyBaseController {
                     } else {
                         msg = MyConstantUtil.MSG.MSG___find_bill_success;
 
-                        let data = null;
+                        let data = undefined;
                         data = result_findById;
                         MyCommon.res_send_success(
                             msg,
@@ -325,7 +329,7 @@ class MyController extends MyBaseController {
                         console.log('查询账单列表成功');
                         msg = MyConstantUtil.MSG.MSG___find_bill_list_success;
 
-                        let data = null;
+                        let data = undefined;
                         data = {
                             'total_count' : result_paginate.total,
                             'data_list' : result_paginate.docs,

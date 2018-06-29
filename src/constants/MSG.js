@@ -23,6 +23,8 @@ export default {
     "MSG___login_failure":'登录失败',
     "MSG___register_failure":'注册失败',
     "MSG___register_success":'注册成功',
+    "MSG___logout_success":'退出登录成功',
+    "MSG___logout_failure":'退出登录失败',
 
 
     "MSG___this_provider_name_had_exist":'该供应商名称已经存在',
