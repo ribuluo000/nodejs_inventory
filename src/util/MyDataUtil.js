@@ -36,7 +36,12 @@ function obj(){
     };
 
     /**
-     * 订单流水号生成 时间年月6位(171201) + 类型1位(1付钱,2收钱) +  毫秒时间戳后5位 + 用户ID后4位 共16位
+     * 订单流水号生成 时间年月6位(171201) +
+     * 账单类型1位(1-付钱,2-收钱)+
+     * 业务编码1位(1-WEB,2-APP,other is the third party ) +
+     * 毫秒时间戳后4位 +
+     * 用户ID后4位
+     * 共16位
      */
     this.get_bill_order_number = (parameter) => {
         let type = Number(parameter.type);
@@ -66,7 +71,17 @@ function obj(){
         let sRandom = String(nowTime).substr(String(nowTime).length - 5, 5);
         let sUserId = user_id.substr(user_id.length - 4, 4);
 
-        return `${year}${month}${day}${type}${sRandom}${sUserId}`;
+        let TYPE_FROM = MyConstantUtil.TYPE.TYPE_FROM;
+        let from = parameter.from || TYPE_FROM.UNKNOWN.value;
+        let type_from_key = TYPE_FROM.UNKNOWN.key;
+        {
+            let type_from = TYPE_FROM[from];
+            if(type_from){
+                type_from_key = type_from.key;
+            }
+        }
+
+        return `${year}${month}${day}${type_from_key}${type}${sRandom}${sUserId}`;
     };
 
     /**
