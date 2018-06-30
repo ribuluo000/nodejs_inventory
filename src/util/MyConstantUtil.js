@@ -6,6 +6,7 @@ import MSG from '../constants/MSG.js';
 import PARAM from '../constants/PARAM';
 import CODE from '../constants/CODE.js';
 import TYPE from '../constants/TYPE.js';
+import PERMISSION from '../constants/PERMISSION.js';
 let obj = {
     DEBUG:'DEBUG',
     RELEASE:'RELEASE',
@@ -14,6 +15,7 @@ let obj = {
     MSG:MSG,
     CODE:CODE,
     TYPE:TYPE,
+    PERMISSION:PERMISSION,
 
 
 };

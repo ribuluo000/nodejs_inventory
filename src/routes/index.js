@@ -6,11 +6,13 @@ import customer from './customer'
 import product from './product'
 import batch from './batch'
 import bill from './bill'
+import test from './test'
 
 export default app => {
 	// app.get('/', (req, res, next) => {
 	// 	res.redirect('/');
 	// });
+	app.use('/test', test);
 	app.use('/user', user);
 	app.use('/provider', provider);
 	app.use('/customer', customer);

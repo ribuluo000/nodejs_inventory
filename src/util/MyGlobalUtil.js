@@ -16,6 +16,7 @@ import MyAccessLogUtil from './MyAccessLogUtil';
 import MyHttpUtil from './MyHttpUtil';
 import MyLogUtil from './MyLogUtil';
 import MyVerifyUtil from './MyVerifyUtil';
+import MyPermissionUtil from './MyPermissionUtil';
 import uuid from 'node-uuid';
 import async from 'async';
 import MyCommon from '../common/MyCommon';
@@ -27,6 +28,7 @@ global.TYPE = MyConstantUtil.TYPE;
 global.MSG = MyConstantUtil.MSG;
 global.REQ_URL = MyConstantUtil.REQ_URL;
 global.PARAM = MyConstantUtil.PARAM;
+global.PERMISSION = MyConstantUtil.PERMISSION;
 
 
 console.log(i18n.__('Welcome'));
@@ -43,6 +45,7 @@ global.MyHttpUtil = MyHttpUtil;
 global.MyLogUtil = MyLogUtil;
 global.MyLog = MyLogUtil.logger;
 global.MyVerifyUtil = MyVerifyUtil;
+global.MyPermissionUtil = MyPermissionUtil;
 global.MyCommon = MyCommon;
 global.MyConfig = MyConfig;
 global.async = async;
