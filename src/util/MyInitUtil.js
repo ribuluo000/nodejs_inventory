@@ -13,7 +13,7 @@ class InitUtil {
         MyGlobalUtil.init(app);
         MyAccessLogUtil.init(app);
         MyLogUtil.init(app);
-        MyPermissionUtil.init(app);
+
 
     }
 }

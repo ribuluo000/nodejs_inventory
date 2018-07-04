@@ -1,16 +1,21 @@
 /**
  * Created by nick on 2018/1/27.
  */
-var acl = require('acl');
+// var acl = require('acl');
 class MyPermissionUtil {
     constructor() {
 
     }
 
-    init(app) {
-        let dbInstance = redis_db0;
-        let prefix = 'acl';
-        acl = new acl(new acl.redisBackend(dbInstance, prefix));
+    init(acl) {
+        this.acl = acl;
+        acl.allow('guest', 'business', 'view');
+        acl.allow('guest', 'business2', 'view');
+        return;
+        // let dbInstance = db;
+        // let prefix = 'acl_';
+        // let mongodbBackend = new acl.mongodbBackend(dbInstance, prefix);
+        // acl = new acl(mongodbBackend);
         let resources = PERMISSION.resources;
         let permissions = PERMISSION.permissions;
         acl.allow([
@@ -95,6 +100,7 @@ class MyPermissionUtil {
     }
 
     test() {
+        let acl = this.acl;
         console.log('test');
         let resources = PERMISSION.resources;
         let permissions = PERMISSION.permissions;
@@ -172,7 +178,7 @@ class MyPermissionUtil {
     };
 
     get_acl() {
-        return acl;
+        return this.acl;
     };
 }
 

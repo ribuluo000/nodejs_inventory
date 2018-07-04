@@ -349,7 +349,7 @@ exports.on_catch_error = function (msg, req_url, res, err, fields) {
         let duplicate_value = '';
         duplicate_value = err.message.split('\"')[ 1 ];
 
-        code = CODE.code_30001.code;
+        code = CODE.code_30002.code;
         msg = duplicate_value + MyConstantUtil.MSG.MSG___had_exist;
         MyCommon.res_send_error(
             code,
