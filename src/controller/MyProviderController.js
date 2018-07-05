@@ -223,7 +223,7 @@ class MyController extends MyBaseController {
                     page_size,
                 } = fields;
                 try {
-                    const result_paginate = await MyModel.paginate({}, { sort:'-create_time',page : page_number, limit : page_size });
+                    const result_paginate = await MyModel.paginate({object_id_created_by:user_id}, { sort:'-create_time',page : page_number, limit : page_size });
 
                     /**
                      result_paginate { docs: [], total: 0, limit: 10, page: 3, pages: 1 }
