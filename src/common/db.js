@@ -5,6 +5,7 @@ import bluebird from "bluebird";
 import chalk from "chalk";
 import mongoose_paginate from "mongoose-paginate";
 mongoose.Promise = bluebird;
+var acl = require('acl');
 
 /*
  * 连接多表操作
@@ -22,6 +23,9 @@ conn1.on('error', function (error) {
 
 conn1.once('open', function dbOpen() {
     MyLog.info('successfully opened the mongodb_conn1');
+    // console.log('conn1',conn1);
+    acl = new acl(new acl.mongodbBackend(conn1.db, 'acl_'));
+    MyPermissionUtil.init(acl);
     console.log(
         chalk.green('连接数据库 mongodb_conn1 成功')
     );

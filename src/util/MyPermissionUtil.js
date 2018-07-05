@@ -9,11 +9,11 @@ class MyPermissionUtil {
 
     init(acl) {
         this.acl = acl;
-        acl.allow('guest', 'business', 'view');
-        acl.allow('guest', 'business2', 'view');
-        return;
-        // let dbInstance = db;
-        // let prefix = 'acl_';
+        // acl.allow('guest', 'business', 'view');
+        // acl.allow('guest', 'business2', 'view');
+        // return;
+        // let dbInstance = db.mongodb_conn1.db;
+        // let prefix = 'acl__';
         // let mongodbBackend = new acl.mongodbBackend(dbInstance, prefix);
         // acl = new acl(mongodbBackend);
         let resources = PERMISSION.resources;
