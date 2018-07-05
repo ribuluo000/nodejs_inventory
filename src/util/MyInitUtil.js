@@ -13,7 +13,9 @@ class InitUtil {
         MyGlobalUtil.init(app);
         MyAccessLogUtil.init(app);
         MyLogUtil.init(app);
-
+        if (app.get('env') === 'production') {
+            console.log = ()=>{};
+        }
 
     }
 }
