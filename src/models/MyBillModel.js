@@ -76,6 +76,7 @@ var schema = new Schema({
 
     transaction_amount:{ type: Schema.Types.Decimal128, default: new Decimal(0) }, //交易金额
 
+    name: String,	//供应商名称或者客户名称
     remark: String,	//备注
 
     create_time: { type: Date, default: Date.now }	//创建时间

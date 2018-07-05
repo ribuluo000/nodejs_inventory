@@ -31,7 +31,7 @@ class MyController extends MyBaseController {
                 const {
                     access_token,
                     user_id,
-                    name,
+                    // name,
                     remark,
                     type,
                     transaction_amount,
@@ -40,6 +40,8 @@ class MyController extends MyBaseController {
                     customer,
                     products,
                 } = fields;
+
+                let name = undefined;
 
                 const check_form_data_detailed = () => {
                     let result_check_form_data_detailed = { passed : false, key_name : '' };
@@ -119,6 +121,8 @@ class MyController extends MyBaseController {
                                     return error_provider();
                                 }
 
+                                name = value[PARAM___name];
+
                             } else {
                                 return error_provider();
                             }
@@ -137,6 +141,8 @@ class MyController extends MyBaseController {
                                 ) {
                                     return error_customer();
                                 }
+
+                                name = value[PARAM___name];
 
                             } else {
                                 return error_customer();
@@ -307,7 +313,7 @@ class MyController extends MyBaseController {
                     page_size,
                 } = fields;
                 try {
-                    const result_paginate = await MyModel.paginate({}, { page : page_number, limit : page_size });
+                    const result_paginate = await MyModel.paginate({}, {select:'_id name type create_time remark transaction_amount',sort:'-create_time', page : page_number, limit : page_size });
 
                     /**
                      result_paginate { docs: [], total: 0, limit: 10, page: 3, pages: 1 }
