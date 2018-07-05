@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import redis from "redis";
-import config from "./config";
+import config from 'config-lite';
 import bluebird from "bluebird";
 import chalk from "chalk";
 import mongoose_paginate from "mongoose-paginate";

@@ -4,7 +4,7 @@
 import request from 'request';
 import node_fetch from 'node-fetch';
 import async from 'async';
-import MyConfig from '../common/config';
+import MyConfig from 'config-lite';
 import db from '../common/db';
 
 const config = MyConfig;

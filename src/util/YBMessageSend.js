@@ -1,7 +1,7 @@
 import request from 'request';
 import urlencode from 'urlencode';
 import _ from 'underscore';
-import MyConfig from '../common/config';
+import MyConfig from 'config-lite';
 
 import MyEncryptionUtil from './MyEncryptionUtil';
 import request from 'request';

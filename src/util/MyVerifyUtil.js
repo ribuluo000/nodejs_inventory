@@ -5,7 +5,7 @@
 import fs from "fs";
 import path from "path";
 import MyEncryptionUtil from "./MyEncryptionUtil";
-import MyConfig from "../common/config";
+import MyConfig from 'config-lite';
 function YBVerify() {
     var join = path.join;
     var md5 = MyEncryptionUtil.md5;

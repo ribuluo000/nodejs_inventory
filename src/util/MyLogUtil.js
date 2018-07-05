@@ -4,7 +4,7 @@
 
 import log4js from 'log4js';
 import path from 'path';
-import MyConfig from '../common/config';
+import MyConfig from 'config-lite';
 import MyConstantUtil from './MyConstantUtil';
 var config = MyConfig
 var logDirectory = path.join(__dirname,'..', 'log')
