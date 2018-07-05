@@ -68,7 +68,7 @@ global.Decimal = Decimal;
 global.db = db;
 global.mongodb_conn1 = db.mongodb_conn1;
 // global.mongodb_conn2 = db.mongodb_conn2;
-// global.redis_db0 = db.redis_db0;
+global.redis_db0 = db.redis_db0;
 // global.redis_db1 = db.redis_db1;
 
 
