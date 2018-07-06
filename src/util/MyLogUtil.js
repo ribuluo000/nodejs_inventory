@@ -15,7 +15,7 @@ log4js.configure({
         server_log: { type: 'file', filename: path.join(logDirectory, 'server_log.log') } ,
         server_error: { type: 'file', filename: path.join(logDirectory, 'server_error.log') } ,
         access_log: {
-            type: 'DateFile',
+            type: 'dateFile',
             filename: path.join(logDirectory,'access_log', 'access.log'),
             pattern: '-yyyy-MM-dd.log',
             alwaysIncludePattern: true,
