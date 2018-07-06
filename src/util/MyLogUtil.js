@@ -74,8 +74,10 @@ log4js.configure({
 const loggerInfo = log4js.getLogger('server_log');
 const loggerError = log4js.getLogger('server_error');
 
-
-
+/**
+ * @deprecated instead by MyAccessLogUtil.
+ * @param app
+ */
 var init = (app)=>{
     app.use(log4js.connectLogger(log4js.getLogger('access_log'), { level: log4js.levels.INFO }));
 };
