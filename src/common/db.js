@@ -15,7 +15,7 @@ var conn1 = mongoose.createConnection(mongodb.conn1.path, mongodb.conn1.options)
 var conn2 = mongoose.createConnection(mongodb.conn2.path, mongodb.conn2.options);
 
 conn1.on('error', function (error) {
-    MyLog.error('error occured from mongodb_conn1');
+    MyLogError.error('error occured from mongodb_conn1');
     console.error(
         chalk.red('Error in mongodb_conn1 connection: ' + error)
     );
@@ -32,7 +32,7 @@ conn1.once('open', function dbOpen() {
 });
 
 conn2.on('error', function (error) {
-    MyLog.error('error occured from mongodb_conn2');
+    MyLogError.error('error occured from mongodb_conn2');
     console.error(
         chalk.red('Error in mongodb_conn2 connection: ' + error)
     );
@@ -56,7 +56,7 @@ client.on('connect', function () {
     );
 });
 client.on('error', function (error) {
-    MyLog.error('error occured from redis_db0');
+    MyLogError.error('error occured from redis_db0');
     console.error(
         chalk.red('Error in redis_db0 connection: ' + error)
     );
@@ -70,7 +70,7 @@ redis_db1.on('connect', function () {
     );
 });
 redis_db1.on('error', function (error) {
-    MyLog.error('error occured from redis_db1');
+    MyLogError.error('error occured from redis_db1');
     console.error(
         chalk.red('Error in redis_db1 connection: ' + error)
     );

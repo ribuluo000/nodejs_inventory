@@ -1,22 +1,24 @@
 /**
  * Created by nick on 2018/1/29.
  */
-function MyDateTimeUtil(){
+
+import moment from 'moment';
+let obj = {
 
 
     /**
      * 获取当前时间
      */
-    this.nowTime = function () {
+    nowTime :  ()=> {
         return Math.round(new Date().getTime());
-    };
+    },
 
 
 
     /**
      * 设置七牛云路径 时间戳
      */
-    this.serial_number = () => {
+    serial_number : () => {
         var date = new Date();
         var year = String(date.getFullYear());
         var month = (date.getMonth()) + 1;
@@ -52,9 +54,19 @@ function MyDateTimeUtil(){
 
         var number = year + month + day + hours + minutes + seconds;
         return number;
-    };
+    },
+
+
+    format2MM_DD__HH_mm:(str)=>{
+        return moment(str).format('MM-DD HH:mm');
+    },
+
+        format2YYYY_MM_DD__HH_mm_ss:(str)=>{
+        return moment(str).format('YYYY-MM-DD HH:mm:ss');
+    },
+
 
 
 
 }
-module.exports = new MyDateTimeUtil();
+module.exports = obj;

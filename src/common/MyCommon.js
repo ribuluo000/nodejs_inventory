@@ -359,10 +359,12 @@ exports.on_catch_error = function (msg, req_url, res, err, fields) {
         );
         return;
     }
+    let cur_time = MyDateTimeUtil.format2YYYY_MM_DD__HH_mm_ss(MyDateTimeUtil.nowTime());
 
-    MyLog.error(`
+    MyLogError.error(`
                 
                 err___
+                day::${cur_time}__\n
                 msg::${req_url}__\n
                 req_url::${msg}__\n
                 err::${JSON.stringify(err)}__\n
