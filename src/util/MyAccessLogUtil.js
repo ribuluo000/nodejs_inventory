@@ -33,20 +33,26 @@ class MyAccessLogUtil{
         app.use(morgan('combined', {stream: accessLogStream}));
         app.use(morgan(function (tokens, req, res) {
             if(tokens.status(req, res)>=400 || tokens['response-time'](req, res)>1000){
+                let req_data = req.url+'-'+'-'+JSON.stringify(req.query)+'-';
+                let cur_time = new Date().getTime();
+                let http_type = tokens.method(req, res);
+                let http_code = tokens.status(req, res);
+                let response_time = tokens['response-time'](req, res)+'ms';
                 let data={
                     system_name: 'system_name',
-                    http_type:tokens.method(req, res),
-                    http_code:tokens.status(req, res),
-                    data:req.body,   //传输数据
-                    response_time:tokens['response-time'](req, res), //响应时间
-                    day:new Date().getTime(),
+                    http_type:http_type,
+                    http_code:http_code,
+                    data:req_data,   //传输数据
+                    response_time:response_time, //响应时间
+                    day:cur_time,
                 };
                 YBSystemModel.create(data);
                 return [
-                    tokens.method(req, res)+' /',
-                    ': '+JSON.stringify(req.body),
-                    'Code:'+tokens.status(req, res),
-                    'response-time:'+tokens['response-time'](req, res)+'ms'
+                    http_type,
+                    'Code:'+http_code,
+                    'response-time:'+response_time,
+                    'query: '+req_data,
+                    'day: '+cur_time,
                 ].join(' ')
             }
         }, {stream: accessLogStreamShort}));
