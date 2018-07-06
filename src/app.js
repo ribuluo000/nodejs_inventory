@@ -37,41 +37,41 @@ app.all('*', (req, res, next) => {
 const MongoStore = connectMongo(session);
 const RedisStore = connectRedis(session);
 app.use(cookieParser());
-// {
-//     //mongo
-//     app.use(session({
-//         name: config.session.name,
-//         secret: config.session.secret,
-//         resave: true,
-//         saveUninitialized: false,
-//         cookie: config.session.cookie,
-//         store: new MongoStore({
-//             // url: config.url
-//             mongooseConnection:mongodb_conn1,
-//         })
-//     }))
-// }
-
 {
-    //redis
+    //todo mongo
     app.use(session({
         name: config.session.name,
         secret: config.session.secret,
         resave: true,
         saveUninitialized: false,
         cookie: config.session.cookie,
-        store: new RedisStore({
+        store: new MongoStore({
             // url: config.url
-            client:redis_db0,
+            mongooseConnection:mongodb_conn1,
         })
     }))
-    app.use(function (req, res, next) {
-        if (!req.session) {
-            return next(new Error('session error oh no')) // handle error
-        }
-        next() // otherwise continue
-    })
 }
+
+// {
+//     //todo redis
+//     app.use(session({
+//         name: config.session.name,
+//         secret: config.session.secret,
+//         resave: true,
+//         saveUninitialized: false,
+//         cookie: config.session.cookie,
+//         store: new RedisStore({
+//             // url: config.url
+//             client:redis_db0,
+//         })
+//     }))
+//     app.use(function (req, res, next) {
+//         if (!req.session) {
+//             return next(new Error('session error oh no')) // handle error
+//         }
+//         next() // otherwise continue
+//     })
+// }
 
 
 app.use(expressWinston.logger({
