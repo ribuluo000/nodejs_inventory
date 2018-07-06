@@ -9,8 +9,6 @@ import cookieParser from 'cookie-parser'
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
 import connectRedis from 'connect-redis';
-import winston from 'winston';
-import expressWinston from 'express-winston';
 import path from 'path';
 import history from 'connect-history-api-fallback';
 import chalk from 'chalk';
@@ -74,31 +72,7 @@ app.use(cookieParser());
 // }
 
 
-app.use(expressWinston.logger({
-    transports: [
-        new (winston.transports.Console)({
-          json: true,
-          colorize: true
-        }),
-        new winston.transports.File({
-          filename: 'src/logs/success.log'
-        })
-    ]
-}));
-
 router(app);
-
-app.use(expressWinston.errorLogger({
-    transports: [
-        new winston.transports.Console({
-          json: true,
-          colorize: true
-        }),
-        new winston.transports.File({
-          filename: 'src/logs/error.log'
-        })
-    ]
-}));
 
 app.use(history());
 app.use(express.static('src/public'));

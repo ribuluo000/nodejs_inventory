@@ -49,11 +49,11 @@ class MyAccessLogUtil{
                 };
                 YBSystemModel.create(data);
                 return [
+                    'day: '+cur_time,
                     http_type,
                     'Code:'+http_code,
                     'response-time:'+response_time,
                     'query: '+req_data,
-                    'day: '+cur_time,
                 ].join(' ')
             }
         }, {stream: accessLogStreamShort}));
