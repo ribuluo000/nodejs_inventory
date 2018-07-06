@@ -5,14 +5,15 @@
 import MyGlobalUtil from "./MyGlobalUtil";
 
 import MyAccessLogUtil from "./MyAccessLogUtil";
-import MyLogUtil from "./MyLogUtil";
 import MyPermissionUtil from "./MyPermissionUtil";
 
 class InitUtil {
     init(app) {
-        MyGlobalUtil.init(app);
+        // MyLogUtil.init(app); //todo 使用 morgan 记录 access log，也就是 MyAccessLogUtil
         MyAccessLogUtil.init(app);
-        MyLogUtil.init(app);
+        MyGlobalUtil.init(app);
+
+
         if (app.get('env') === 'production') {
             console.log = ()=>{};
         }

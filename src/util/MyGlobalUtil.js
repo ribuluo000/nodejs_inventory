@@ -57,6 +57,7 @@ global.MyAccessLogUtil = MyAccessLogUtil;
 global.MyHttpUtil = MyHttpUtil;
 global.MyLogUtil = MyLogUtil;
 global.MyLog = MyLogUtil.logger;
+global.MyLogError = MyLogUtil.loggerError;
 global.MyVerifyUtil = MyVerifyUtil;
 global.MyPermissionUtil = MyPermissionUtil;
 global.MyCommon = MyCommon;

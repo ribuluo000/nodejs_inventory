@@ -4,9 +4,6 @@
 
 import log4js from 'log4js';
 import path from 'path';
-import MyConfig from 'config-lite';
-import MyConstantUtil from './MyConstantUtil';
-var config = MyConfig
 var logDirectory = path.join(__dirname,'..', 'log')
 
 log4js.configure({
@@ -16,7 +13,7 @@ log4js.configure({
         server_error: { type: 'file', filename: path.join(logDirectory, 'server_error.log') } ,
         access_log: {
             type: 'dateFile',
-            filename: path.join(logDirectory,'access_log', 'access.log'),
+            filename: path.join(logDirectory,'access_log', 'access_log'),
             pattern: '-yyyy-MM-dd.log',
             alwaysIncludePattern: true,
             category: 'access'
@@ -74,8 +71,8 @@ log4js.configure({
 
 });
 
-const loggerDebug = log4js.getLogger('server_log');
-const loggerRelease = log4js.getLogger('server_error');
+const loggerInfo = log4js.getLogger('server_log');
+const loggerError = log4js.getLogger('server_error');
 
 
 
@@ -83,12 +80,6 @@ var init = (app)=>{
     app.use(log4js.connectLogger(log4js.getLogger('access_log'), { level: log4js.levels.INFO }));
 };
 
-let logger = undefined;
-if(config.debug_mode == MyConstantUtil.DEBUG){
-    logger = loggerDebug;
-}else {
-    logger = loggerRelease;
-}
 
 // logger.trace('Entering cheese testing');
 // logger.debug('Got cheese.');
@@ -100,7 +91,8 @@ if(config.debug_mode == MyConstantUtil.DEBUG){
 function obj() {
 
     this.init = init;
-    this.logger = logger;
+    this.logger = loggerInfo;
+    this.loggerError = loggerError;
 }
 
 export default new obj();
