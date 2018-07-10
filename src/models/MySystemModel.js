@@ -15,7 +15,7 @@ let schema = new Schema({
     api_name:{type: String, required: false},
     data:{type: Object, required: false},   //传输数据
     response_time:{type: Number, required: false}, //响应时间
-    day:{type: Number, required: false}
+    day:{type: String, required: false}
 });
 
 schema.plugin(mongoose_paginate);

@@ -38,7 +38,7 @@ class MyAccessLogUtil{
                 let cur_time = MyDateTimeUtil.format2YYYY_MM_DD__HH_mm_ss(MyDateTimeUtil.nowTime());
                 let http_type = tokens.method(req, res);
                 let http_code = tokens.status(req, res);
-                let response_time = tokens['response-time'](req, res)+'ms';
+                let response_time = tokens['response-time'](req, res);
                 let data={
                     system_name: 'system_name',
                     http_type:http_type,
